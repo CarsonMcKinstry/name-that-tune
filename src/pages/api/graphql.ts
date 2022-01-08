@@ -2,13 +2,19 @@ import { schema } from "@packages/graphql";
 import { SPOTIFY_ACCESS_TOKEN_COOKIE } from "@packages/spotify";
 import { SpotifyDataSource } from "@packages/spotify/graphql/SpotifyDataSource";
 import { ApolloServer } from "apollo-server-micro";
-import { NextApiHandler } from "next";
+import { NextApiHandler, NextApiRequest } from "next";
 
 const apolloServer = new ApolloServer({
     schema,
     introspection: true,
-    context({ req }) {
-        const spotifyAccessToken = req.cookies[SPOTIFY_ACCESS_TOKEN_COOKIE];
+    context({ req }: { req: NextApiRequest }) {
+        let spotifyAccessToken =
+            req.headers.authorization ??
+            req.cookies[SPOTIFY_ACCESS_TOKEN_COOKIE];
+
+        if (spotifyAccessToken && !spotifyAccessToken.startsWith("Bearer")) {
+            spotifyAccessToken = `Bearer ${spotifyAccessToken}`;
+        }
 
         return {
             spotifyAccessToken,
@@ -37,7 +43,7 @@ const graphqlHandler: NextApiHandler = async (req, res) => {
     );
     res.setHeader(
         "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept"
+        "Origin, X-Requested-With, Content-Type, Accept, Authorization"
     );
     if (req.method === "OPTIONS") {
         res.end();

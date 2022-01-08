@@ -1,0 +1,44 @@
+interface User {
+    id: ID!
+    type: ObjectType!
+    uri: String!
+    external_urls: ExternalUrls!
+    display_name: String!
+    images: [Image!]!
+    followers: Followers!
+}
+
+type Me implements User {
+    id: ID!
+    type: ObjectType!
+    uri: String!
+    external_urls: ExternalUrls!
+    display_name: String!
+    images: [Image!]!
+    followers: Followers!
+
+    country: String
+    email: String
+    product: String
+    explicit_content: ExplicitContentSettings
+
+    # top_artists(limit: Int, offset: Int, timeRange: TimeRange): Artists!
+    # top_tracks(limit: Int, offset: Int, timeRange: TimeRange): Tracks!
+    # playlists(limit: Int, offset: Int): Playlists!
+}
+
+type UserProfile implements User {
+    id: ID!
+    type: ObjectType!
+    uri: String!
+    external_urls: ExternalUrls!
+    display_name: String!
+    images: [Image!]!
+    followers: Followers!
+    # playlists(limit: Int, offset: Int): Playlists!
+}
+
+type Query {
+    me: Me
+    user(id: ID!): UserProfile
+}

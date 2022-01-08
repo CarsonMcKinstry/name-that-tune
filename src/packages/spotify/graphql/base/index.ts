@@ -1,1 +1,1 @@
-export const thing = true;
+export { default as spotifyBaseTypeDefs } from "./base.graphql";

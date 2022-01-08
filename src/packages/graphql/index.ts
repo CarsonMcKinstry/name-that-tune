@@ -3,9 +3,18 @@ import { mergeTypeDefs, mergeResolvers } from "@graphql-tools/merge";
 import { GraphqlContext } from "./types";
 
 import { baseTypeDefs, baseResolvers } from "./schemas/base";
+import {
+    spotifyBaseTypeDefs,
+    userResolvers,
+    userTypeDefs,
+} from "@packages/spotify/graphql";
 
-const typeDefs = mergeTypeDefs(baseTypeDefs);
-const resolvers = mergeResolvers(baseResolvers);
+const typeDefs = mergeTypeDefs([
+    baseTypeDefs,
+    spotifyBaseTypeDefs,
+    userTypeDefs,
+]);
+const resolvers = mergeResolvers([baseResolvers, userResolvers]);
 
 export const schema = makeExecutableSchema<GraphqlContext>({
     typeDefs,
@@ -13,3 +22,4 @@ export const schema = makeExecutableSchema<GraphqlContext>({
 });
 
 export type { GraphqlContext };
+export * from "./gql-types";

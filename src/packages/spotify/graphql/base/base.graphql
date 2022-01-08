@@ -1,0 +1,27 @@
+# ======= ENUMS =======
+
+enum ObjectType {
+    playlist
+    user
+}
+
+# ======= TYPES =======
+
+type Image {
+    url: String!
+    height: Int
+    width: Int
+}
+
+type ExternalUrls {
+    spotify: String!
+}
+
+type Followers {
+    total: Int!
+}
+
+type ExplicitContentSettings {
+    filter_enabled: Boolean!
+    filter_locked: Boolean!
+}

@@ -1,1 +1,2 @@
-export const thing = true;
+export * from "./user";
+export * from "./base";
