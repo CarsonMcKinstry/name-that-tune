@@ -1,0 +1,26 @@
+type Album implements Item {
+    id: ID!
+    name: String!
+    type: ItemType!
+    uri: String!
+    album_type: AlbumType!
+
+    release_date: String!
+    release_date_precision: DatePrecision!
+
+    artists: [Artist!]!
+    external_urls: ExternalUrls!
+    available_markets: [String!]
+    restrictions: Restrictions
+
+    images: [Image!]!
+
+    total_tracks: Int!
+    tracks(limit: Int, offset: Int, market: String): Tracks!
+}
+
+type Query {
+    album(id: ID!, market: String): Album
+    albums(ids: [ID!]!, market: String): [Album!]!
+    newReleases(country: String, limit: Int, offset: Int): Albums!
+}

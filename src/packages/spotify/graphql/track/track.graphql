@@ -1,0 +1,49 @@
+type Track implements Item {
+    id: ID!
+    name: String!
+    type: ItemType!
+    available_markets: [String!]
+
+    artists: [Artist!]!
+
+    album: Album!
+    disc_umber: Int!
+    track_number: Int!
+    duration_ms: Int!
+    explicit: Boolean!
+    popularity: Int!
+
+    restrictions: Restrictions
+
+    uri: String!
+    preview_url: String
+
+    external_ids: ExternalIds!
+    external_urls: ExternalUrls!
+    linked_from: LinkedFrom
+    is_playable: Boolean
+    is_local: Boolean!
+    audio_features: AudioFeatures!
+}
+
+type AudioFeatures {
+    acousticness: Float!
+    danceability: Float!
+    duration_ms: Int!
+    energy: Float!
+    instrumentalness: Float!
+    key: Int!
+    liveness: Float!
+    loudness: Float!
+    mode: Int!
+    speechiness: Float!
+    temp: Float
+    time_signature: Int!
+    type: String!
+    valence: Float!
+}
+
+type Query {
+    track(id: ID!, market: String): Track
+    tracks(ids: [ID!]!, market: String): [Track!]!
+}
