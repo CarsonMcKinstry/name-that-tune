@@ -1,4 +1,5 @@
 import { Nullable } from "@packages/types";
+import { SpotifyDataSource } from "./graphql/SpotifyDataSource";
 
 export interface AuthSuccess {
     access_token: string;
@@ -23,4 +24,11 @@ export const isAuthFailure = (response: Object): response is AuthFailure => {
 
 export type AuthProps = {
     accessToken: Nullable<string>;
+};
+
+export type ApolloSpotifyContext = {
+    spotifyAccessToken?: string;
+    dataSources: {
+        spotify: SpotifyDataSource;
+    };
 };
