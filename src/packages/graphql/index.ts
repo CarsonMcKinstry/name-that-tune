@@ -1,39 +1,52 @@
 import { makeExecutableSchema } from "@graphql-tools/schema";
-import { mergeTypeDefs, mergeResolvers } from "@graphql-tools/merge";
+import { mergeResolvers } from "@graphql-tools/merge";
 import { GraphqlContext } from "./types";
 
 import { baseTypeDefs, baseResolvers } from "./schemas/base";
-import // spotifyBaseTypeDefs,
-// userResolvers,
-// userTypeDefs,
-// albumTypeDefs,
-// artistTypeDefs,
-// trackTypeDefs,
-// searchTypeDefs,
-// playlistTypeDefs,
-"@packages/spotify/graphql";
+import {
+    spotifyBaseTypeDefs,
+    spotifyBaseResolvers,
+    userResolvers,
+    userTypeDefs,
+    albumResolvers,
+    albumTypeDefs,
+    artistResolvers,
+    artistTypeDefs,
+    trackResolvers,
+    trackTypeDefs,
+    searchResolvers,
+    searchTypeDefs,
+    playlistResolvers,
+    playlistTypeDefs,
+} from "@packages/spotify/graphql";
 
-const typeDefs = mergeTypeDefs([
+const typeDefs = [
     baseTypeDefs,
-    // spotifyBaseTypeDefs,
-    // userTypeDefs,
-    // albumTypeDefs,
-    // artistTypeDefs,
-    // trackTypeDefs,
-    // searchTypeDefs,
-    // playlistTypeDefs,
-]);
-const resolvers = mergeResolvers([
+    trackTypeDefs,
+    albumTypeDefs,
+    artistTypeDefs,
+    spotifyBaseTypeDefs,
+    userTypeDefs,
+    searchTypeDefs,
+    playlistTypeDefs,
+];
+
+const resolvers = mergeResolvers<any, GraphqlContext>([
     baseResolvers,
-    // userResolvers
+    userResolvers,
+    spotifyBaseResolvers,
+    albumResolvers,
+    artistResolvers,
+    trackResolvers,
+    searchResolvers,
+    playlistResolvers,
 ]);
 
-const schema = makeExecutableSchema<GraphqlContext>({
+export const schema = makeExecutableSchema<GraphqlContext>({
     typeDefs,
     resolvers,
 });
 
 export type { GraphqlContext };
-// export * from "./gql-types";
-
-export { schema };
+export type { APIPaginationResponse, ContextResolvers } from "./types";
+export * from "./gql-types";

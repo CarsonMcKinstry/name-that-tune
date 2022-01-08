@@ -1,1 +1,3 @@
-export const thing = true;
+import { ContextResolvers } from "@packages/graphql";
+
+export const spotifyBaseResolvers: ContextResolvers = {};

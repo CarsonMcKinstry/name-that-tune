@@ -40,6 +40,21 @@ type ExternalUrls {
     spotify: String!
 }
 
+type ExternalIds {
+    """
+    International Standard Recording Code
+    """
+    isrc: String
+    """
+    International Article Number
+    """
+    ean: String
+    """
+    Universal Product Code
+    """
+    upc: String
+}
+
 type Followers {
     total: Int!
 }

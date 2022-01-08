@@ -22,9 +22,9 @@ type Me implements User {
     product: String
     explicit_content: ExplicitContentSettings
 
-    # top_artists(limit: Int, offset: Int, time_range: TimeRange): Artists!
-    # top_tracks(limit: Int, offset: Int, time_range: TimeRange): Tracks!
-    # playlists(limit: Int, offset: Int): Playlists!
+    top_artists(limit: Int, offset: Int, time_range: TimeRange): Artists!
+    top_tracks(limit: Int, offset: Int, time_range: TimeRange): Tracks!
+    playlists(limit: Int, offset: Int): Playlists!
 }
 
 type UserProfile implements User {
@@ -35,7 +35,7 @@ type UserProfile implements User {
     display_name: String!
     images: [Image!]!
     followers: Followers!
-    # playlists(limit: Int, offset: Int): Playlists!
+    playlists(limit: Int, offset: Int): Playlists!
 }
 
 type Query {
