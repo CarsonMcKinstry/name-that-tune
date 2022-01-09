@@ -1,13 +1,4 @@
-// import { getAuthPropsFromContext } from "@packages/spotify/auth/getAuthProps";
-// import { AuthProps, AuthProvider } from "@packages/spotify";
 import { GetServerSideProps, NextPage } from "next";
-
-// type GameHomeProps = AuthProps & {
-
-// }
-
-import { SPOTIFY_ACCESS_TOKEN_COOKIE } from '@packages/spotify';
-import { parseCookies } from 'nookies';
 import gql from 'graphql-tag';
 import { useQuery } from "@apollo/client";
 
@@ -28,27 +19,9 @@ const GameHome: NextPage = () => {
             <a href="/api/logout">Logout</a>
             {loading && <p>Loading...</p>}
             {!loading && <p>Hello, {data.me.display_name}</p>}
+            <a href="/game/new">New Game</a>
         </div>
     )
 }
 
 export default GameHome;
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-    const cookies = parseCookies(context);
-
-    if (!cookies[SPOTIFY_ACCESS_TOKEN_COOKIE]) {
-        return {
-            redirect: {
-                destination: '/api/refresh?redirect=game',
-                permanent: false
-            }
-        }
-    }
-
-    return {
-        props: {
-
-        }
-    }
-}
