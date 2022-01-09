@@ -43,7 +43,7 @@ import {
     UserProfile,
 } from "@packages/graphql";
 import { omitNil } from "@packages/utils";
-import { configurePagination } from "@packages/utils/configurePagination";
+import { configurePagination } from "@packages/utils";
 import { RequestOptions, RESTDataSource } from "apollo-datasource-rest";
 import { AuthenticationError } from "apollo-server-errors";
 import { SPOTIFY_API_BASE_URL } from "..";

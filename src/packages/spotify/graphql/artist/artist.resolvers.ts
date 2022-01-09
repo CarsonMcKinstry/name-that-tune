@@ -3,7 +3,7 @@ import {
     APIPaginationResponse,
     ContextResolvers,
 } from "@packages/graphql";
-import { configurePagination } from "@packages/utils/configurePagination";
+import { configurePagination } from "@packages/utils";
 
 export const artistResolvers: ContextResolvers = {
     Query: {

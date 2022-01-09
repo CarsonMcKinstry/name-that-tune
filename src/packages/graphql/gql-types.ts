@@ -596,13 +596,13 @@ export type UserProfilePlaylistsArgs = {
   offset?: InputMaybe<Scalars['Int']>;
 };
 
-export type TopArtistsQueryVariables = Exact<{
+export type MyTopArtistsQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
 }>;
 
 
-export type TopArtistsQuery = { __typename?: 'Query', me?: { __typename?: 'Me', top_artists: { __typename?: 'Artists', limit: number, offset: number, next?: number | null | undefined, total: number, artists: Array<{ __typename?: 'Artist', name: string, id?: string | null | undefined, images: Array<{ __typename?: 'Image', url: string, height?: number | null | undefined, width?: number | null | undefined }> }> } } | null | undefined };
+export type MyTopArtistsQuery = { __typename?: 'Query', me?: { __typename?: 'Me', top_artists: { __typename?: 'Artists', limit: number, offset: number, next?: number | null | undefined, total: number, artists: Array<{ __typename?: 'Artist', name: string, id?: string | null | undefined, images: Array<{ __typename?: 'Image', url: string, height?: number | null | undefined, width?: number | null | undefined }> }> } } | null | undefined };
 
 
 

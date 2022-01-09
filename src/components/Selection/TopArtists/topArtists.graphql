@@ -1,4 +1,4 @@
-query TopArtists($limit: Int, $offset: Int) {
+query MyTopArtists($limit: Int, $offset: Int) {
     me {
         top_artists(limit: $limit, offset: $offset) {
             limit

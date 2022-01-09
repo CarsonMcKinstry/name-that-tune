@@ -1,20 +1,18 @@
-import { useQuery } from '@apollo/client';
-import { Artists } from '@packages/graphql';
+import { ArtistPortrait } from 'components/Portrait';
 import { FC, useMemo } from 'react';
 
-import query from './topArtists.graphql';
-import { useTopArtistsQuery } from './topArtists.hook';
+import { useMyTopArtistsQuery } from './topArtists.hook';
 
 export const TopArtists: FC = () => { 
-    const { data, loading } = useTopArtistsQuery();
+    const { data, loading } = useMyTopArtistsQuery();
 
     const artists = useMemo(() => {
         return loading ? [] : data?.me?.top_artists.artists ?? [];
     }, [data, loading])
 
     return (
-        <pre>
-            { JSON.stringify(artists, null, 2) }
-        </pre>
+        <div>
+            {artists.map(artist => <ArtistPortrait {...artist} key={artist.id} />)}
+        </div>
     );
 }

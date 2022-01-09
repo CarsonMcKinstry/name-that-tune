@@ -3,7 +3,7 @@ import {
     ContextResolvers,
     Track,
 } from "@packages/graphql";
-import { configurePagination } from "@packages/utils/configurePagination";
+import { configurePagination } from "@packages/utils";
 
 export const albumResolvers: ContextResolvers = {
     Query: {
