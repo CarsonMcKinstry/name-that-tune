@@ -1,4 +1,9 @@
-import { ContextResolvers } from "@packages/graphql";
+import {
+    Album,
+    APIPaginationResponse,
+    ContextResolvers,
+} from "@packages/graphql";
+import { configurePagination } from "@packages/utils/configurePagination";
 
 export const artistResolvers: ContextResolvers = {
     Query: {
@@ -56,7 +61,16 @@ export const artistResolvers: ContextResolvers = {
             return artist.followers ?? { total: 0 };
         },
         async albums(parent, args, { dataSources }) {
-            if (parent.albums) return parent.albums;
+            if (parent.albums) {
+                const { items, ...rest } = configurePagination<Album>(
+                    parent.albums as unknown as APIPaginationResponse<Album>
+                );
+
+                return {
+                    albums: items,
+                    ...rest,
+                };
+            }
 
             if (!parent.id)
                 return {

@@ -1,4 +1,9 @@
-import { ContextResolvers } from "@packages/graphql";
+import {
+    APIPaginationResponse,
+    ContextResolvers,
+    Track,
+} from "@packages/graphql";
+import { configurePagination } from "@packages/utils/configurePagination";
 
 export const albumResolvers: ContextResolvers = {
     Query: {
@@ -14,7 +19,16 @@ export const albumResolvers: ContextResolvers = {
     },
     Album: {
         tracks(parent, args, { dataSources }) {
-            if (parent.tracks) return parent.tracks;
+            if (parent.tracks) {
+                const { items, ...rest } = configurePagination<Track>(
+                    parent.tracks as unknown as APIPaginationResponse<Track>
+                );
+
+                return {
+                    tracks: items,
+                    ...rest,
+                };
+            }
 
             if (!parent.id)
                 return {
