@@ -16,6 +16,7 @@
     "apollo-datasource-rest": "^3.5.0",
     "apollo-server-micro": "^3.6.1",
     "cors": "^2.8.5",
+    "dataloader": "^2.0.0",
     "graphql": "^16.2.0",
     "graphql-tag": "^2.12.6",
     "micro": "^9.3.4",

@@ -16,13 +16,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "AlbumType",
-                "ofType": null
-              }
+              "kind": "ENUM",
+              "name": "AlbumType",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -92,13 +88,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "ID",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -148,13 +140,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -164,13 +152,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "DatePrecision",
-                "ofType": null
-              }
+              "kind": "ENUM",
+              "name": "DatePrecision",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -277,13 +261,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -629,7 +609,7 @@
             "deprecationReason": null
           },
           {
-            "name": "relatedArtists",
+            "name": "related_artists",
             "description": null,
             "args": [],
             "type": {
@@ -645,7 +625,7 @@
             "deprecationReason": null
           },
           {
-            "name": "topTracks",
+            "name": "top_tracks",
             "description": null,
             "args": [
               {
@@ -698,13 +678,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -1407,13 +1383,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -1542,13 +1514,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "ID",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -1590,13 +1558,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -3877,13 +3841,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "Album",
-                "ofType": null
-              }
+              "kind": "OBJECT",
+              "name": "Album",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -3917,13 +3877,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "AudioFeatures",
-                "ofType": null
-              }
+              "kind": "OBJECT",
+              "name": "AudioFeatures",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -3949,7 +3905,7 @@
             "deprecationReason": null
           },
           {
-            "name": "disc_umber",
+            "name": "disc_number",
             "description": null,
             "args": [],
             "type": {
@@ -4017,13 +3973,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "ExternalUrls",
-                "ofType": null
-              }
+              "kind": "OBJECT",
+              "name": "ExternalUrls",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null

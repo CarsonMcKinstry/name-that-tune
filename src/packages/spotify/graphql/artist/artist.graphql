@@ -4,19 +4,19 @@ type Query {
 }
 
 type Artist implements Item {
-    id: ID!
+    id: ID
     name: String!
     type: ItemType!
 
     popularity: Int!
 
     genres: [String!]!
-    uri: String!
+    uri: String
 
     followers: Followers!
     external_urls: ExternalUrls!
     images: [Image!]!
     albums(limit: Int, offset: Int, market: String): Albums!
-    topTracks(market: String!): TopTracks!
-    relatedArtists: RelatedArtists!
+    top_tracks(market: String!): TopTracks!
+    related_artists: RelatedArtists!
 }

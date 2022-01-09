@@ -18,20 +18,20 @@ export type Scalars = {
 
 export type Album = Item & {
   __typename?: 'Album';
-  album_type: AlbumType;
+  album_type?: Maybe<AlbumType>;
   artists: Array<Artist>;
   available_markets?: Maybe<Array<Scalars['String']>>;
   external_urls: ExternalUrls;
-  id: Scalars['ID'];
+  id?: Maybe<Scalars['ID']>;
   images: Array<Image>;
   name: Scalars['String'];
-  release_date: Scalars['String'];
-  release_date_precision: DatePrecision;
+  release_date?: Maybe<Scalars['String']>;
+  release_date_precision?: Maybe<DatePrecision>;
   restrictions?: Maybe<Restrictions>;
   total_tracks: Scalars['Int'];
   tracks: Tracks;
   type: ItemType;
-  uri: Scalars['String'];
+  uri?: Maybe<Scalars['String']>;
 };
 
 
@@ -67,10 +67,10 @@ export type Artist = Item & {
   images: Array<Image>;
   name: Scalars['String'];
   popularity: Scalars['Int'];
-  relatedArtists: RelatedArtists;
-  topTracks: TopTracks;
+  related_artists: RelatedArtists;
+  top_tracks: TopTracks;
   type: ItemType;
-  uri: Scalars['String'];
+  uri?: Maybe<Scalars['String']>;
 };
 
 
@@ -81,7 +81,7 @@ export type ArtistAlbumsArgs = {
 };
 
 
-export type ArtistTopTracksArgs = {
+export type ArtistTop_TracksArgs = {
   market: Scalars['String'];
 };
 
@@ -159,7 +159,7 @@ export type ExternalIds = {
 
 export type ExternalUrls = {
   __typename?: 'ExternalUrls';
-  spotify: Scalars['String'];
+  spotify?: Maybe<Scalars['String']>;
 };
 
 export type Followers = {
@@ -175,10 +175,10 @@ export type Image = {
 };
 
 export type Item = {
-  id: Scalars['ID'];
+  id?: Maybe<Scalars['ID']>;
   name: Scalars['String'];
   type: ItemType;
-  uri: Scalars['String'];
+  uri?: Maybe<Scalars['String']>;
 };
 
 export enum ItemType {
@@ -457,15 +457,15 @@ export type TopTracks = {
 
 export type Track = Item & {
   __typename?: 'Track';
-  album: Album;
+  album?: Maybe<Album>;
   artists: Array<Artist>;
-  audio_features: AudioFeatures;
+  audio_features?: Maybe<AudioFeatures>;
   available_markets?: Maybe<Array<Scalars['String']>>;
-  disc_umber: Scalars['Int'];
+  disc_number: Scalars['Int'];
   duration_ms: Scalars['Int'];
   explicit: Scalars['Boolean'];
   external_ids: ExternalIds;
-  external_urls: ExternalUrls;
+  external_urls?: Maybe<ExternalUrls>;
   id: Scalars['ID'];
   is_local: Scalars['Boolean'];
   is_playable?: Maybe<Scalars['Boolean']>;
@@ -668,20 +668,20 @@ export type ResolversParentTypes = {
 };
 
 export type AlbumResolvers<ContextType = any, ParentType extends ResolversParentTypes['Album'] = ResolversParentTypes['Album']> = {
-  album_type?: Resolver<ResolversTypes['AlbumType'], ParentType, ContextType>;
+  album_type?: Resolver<Maybe<ResolversTypes['AlbumType']>, ParentType, ContextType>;
   artists?: Resolver<Array<ResolversTypes['Artist']>, ParentType, ContextType>;
   available_markets?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
   external_urls?: Resolver<ResolversTypes['ExternalUrls'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   images?: Resolver<Array<ResolversTypes['Image']>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  release_date?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  release_date_precision?: Resolver<ResolversTypes['DatePrecision'], ParentType, ContextType>;
+  release_date?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  release_date_precision?: Resolver<Maybe<ResolversTypes['DatePrecision']>, ParentType, ContextType>;
   restrictions?: Resolver<Maybe<ResolversTypes['Restrictions']>, ParentType, ContextType>;
   total_tracks?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   tracks?: Resolver<ResolversTypes['Tracks'], ParentType, ContextType, RequireFields<AlbumTracksArgs, never>>;
   type?: Resolver<ResolversTypes['ItemType'], ParentType, ContextType>;
-  uri?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  uri?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -704,10 +704,10 @@ export type ArtistResolvers<ContextType = any, ParentType extends ResolversParen
   images?: Resolver<Array<ResolversTypes['Image']>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   popularity?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  relatedArtists?: Resolver<ResolversTypes['RelatedArtists'], ParentType, ContextType>;
-  topTracks?: Resolver<ResolversTypes['TopTracks'], ParentType, ContextType, RequireFields<ArtistTopTracksArgs, 'market'>>;
+  related_artists?: Resolver<ResolversTypes['RelatedArtists'], ParentType, ContextType>;
+  top_tracks?: Resolver<ResolversTypes['TopTracks'], ParentType, ContextType, RequireFields<ArtistTop_TracksArgs, 'market'>>;
   type?: Resolver<ResolversTypes['ItemType'], ParentType, ContextType>;
-  uri?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  uri?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -770,7 +770,7 @@ export type ExternalIdsResolvers<ContextType = any, ParentType extends Resolvers
 };
 
 export type ExternalUrlsResolvers<ContextType = any, ParentType extends ResolversParentTypes['ExternalUrls'] = ResolversParentTypes['ExternalUrls']> = {
-  spotify?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  spotify?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -788,10 +788,10 @@ export type ImageResolvers<ContextType = any, ParentType extends ResolversParent
 
 export type ItemResolvers<ContextType = any, ParentType extends ResolversParentTypes['Item'] = ResolversParentTypes['Item']> = {
   __resolveType: TypeResolveFn<'Album' | 'Artist' | 'Track', ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   type?: Resolver<ResolversTypes['ItemType'], ParentType, ContextType>;
-  uri?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  uri?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
 };
 
 export type LinkedFromResolvers<ContextType = any, ParentType extends ResolversParentTypes['LinkedFrom'] = ResolversParentTypes['LinkedFrom']> = {
@@ -918,15 +918,15 @@ export type TopTracksResolvers<ContextType = any, ParentType extends ResolversPa
 };
 
 export type TrackResolvers<ContextType = any, ParentType extends ResolversParentTypes['Track'] = ResolversParentTypes['Track']> = {
-  album?: Resolver<ResolversTypes['Album'], ParentType, ContextType>;
+  album?: Resolver<Maybe<ResolversTypes['Album']>, ParentType, ContextType>;
   artists?: Resolver<Array<ResolversTypes['Artist']>, ParentType, ContextType>;
-  audio_features?: Resolver<ResolversTypes['AudioFeatures'], ParentType, ContextType>;
+  audio_features?: Resolver<Maybe<ResolversTypes['AudioFeatures']>, ParentType, ContextType>;
   available_markets?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
-  disc_umber?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  disc_number?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   duration_ms?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   explicit?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   external_ids?: Resolver<ResolversTypes['ExternalIds'], ParentType, ContextType>;
-  external_urls?: Resolver<ResolversTypes['ExternalUrls'], ParentType, ContextType>;
+  external_urls?: Resolver<Maybe<ResolversTypes['ExternalUrls']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   is_local?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   is_playable?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;

@@ -6,8 +6,8 @@ type Track implements Item {
 
     artists: [Artist!]!
 
-    album: Album!
-    disc_umber: Int!
+    album: Album
+    disc_number: Int!
     track_number: Int!
     duration_ms: Int!
     explicit: Boolean!
@@ -19,11 +19,11 @@ type Track implements Item {
     preview_url: String
 
     external_ids: ExternalIds!
-    external_urls: ExternalUrls!
+    external_urls: ExternalUrls
     linked_from: LinkedFrom
     is_playable: Boolean
     is_local: Boolean!
-    audio_features: AudioFeatures!
+    audio_features: AudioFeatures
 }
 
 type AudioFeatures {

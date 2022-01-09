@@ -1,12 +1,12 @@
 type Album implements Item {
-    id: ID!
+    id: ID
     name: String!
     type: ItemType!
-    uri: String!
-    album_type: AlbumType!
+    uri: String
+    album_type: AlbumType
 
-    release_date: String!
-    release_date_precision: DatePrecision!
+    release_date: String
+    release_date_precision: DatePrecision
 
     artists: [Artist!]!
     external_urls: ExternalUrls!

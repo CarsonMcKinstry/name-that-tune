@@ -16,5 +16,32 @@ export const userResolvers: ContextResolvers = {
         top_artists(_parent, args, { dataSources }) {
             return dataSources.spotify.getMyTopArtists(args);
         },
+        playlists(_parent, args, { dataSources }) {
+            return dataSources.spotify.getMyPlaylists(args);
+        },
+    },
+    UserProfile: {
+        async followers(parent, _args, { dataSources }) {
+            if (parent.followers) return parent.followers;
+
+            const user = await dataSources.spotify.getUser(parent.id);
+
+            return user.followers;
+        },
+        async images(parent, _args, { dataSources }) {
+            if (parent.images) return parent.images;
+
+            const user = await dataSources.spotify.getUser(parent.id);
+
+            return user.images;
+        },
+
+        async display_name(parent, _args, { dataSources }) {
+            if (parent.display_name) return parent.display_name;
+
+            const user = await dataSources.spotify.getUser(parent.id);
+
+            return user.display_name;
+        },
     },
 };

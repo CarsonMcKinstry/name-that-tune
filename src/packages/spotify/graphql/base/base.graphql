@@ -1,10 +1,10 @@
 # ==== INTERFACES =====
 
 interface Item {
-    id: ID!
+    id: ID
     name: String!
     type: ItemType!
-    uri: String!
+    uri: String
 }
 
 interface Pagination {
@@ -37,7 +37,7 @@ type Image {
 }
 
 type ExternalUrls {
-    spotify: String!
+    spotify: String
 }
 
 type ExternalIds {
