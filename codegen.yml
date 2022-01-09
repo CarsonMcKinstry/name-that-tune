@@ -1,15 +1,24 @@
 overwrite: true
 schema: "http://localhost:3000/api/graphql"
-documents: null
+documents: "src/components/**/*.graphql"
 generates:
-    src/packages/graphql/gql-types.tsx:
+    src/packages/graphql/gql-types.ts:
         plugins:
             - add:
                   content: "// @ts-nocheck"
             - "typescript"
             - "typescript-operations"
             - "typescript-resolvers"
+    src/components/:
+        preset: near-operation-file
+        presetConfig:
+            baseTypesPath: "~@packages/graphql"
+            extension: .hook.ts
+        plugins:
+            - "typescript-operations"
             - "typescript-react-apollo"
+        config:
+            withHooks: true
     ./graphql.schema.json:
         plugins:
             - "introspection"

@@ -1,0 +1,19 @@
+query TopArtists($limit: Int, $offset: Int) {
+    me {
+        top_artists(limit: $limit, offset: $offset) {
+            limit
+            offset
+            next
+            total
+            artists {
+                name
+                id
+                images {
+                    url
+                    height
+                    width
+                }
+            }
+        }
+    }
+}

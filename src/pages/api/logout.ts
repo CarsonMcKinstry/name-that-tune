@@ -14,7 +14,7 @@ const handler: NextApiHandler = (req, res) => {
     nookies.destroy({ res }, SPOTIFY_REFRESH_TOKEN_COOKIE, { path: "/api" });
 
     if (redirect) {
-        res.redirect(`/${redirect}`);
+        res.redirect(`/${decodeURI(String(redirect))}`);
     } else {
         res.redirect("/");
     }

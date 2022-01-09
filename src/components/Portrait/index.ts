@@ -1,0 +1,1 @@
+export { ArtistPortrait } from "./Artist";

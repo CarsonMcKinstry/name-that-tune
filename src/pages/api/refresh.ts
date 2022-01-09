@@ -35,7 +35,7 @@ const handler: NextApiHandler = async (req, res) => {
             res.json({ access_token });
         } else {
             if (redirect) {
-                res.redirect(`/${redirect}`);
+                res.redirect(`/${decodeURI(String(redirect))}`);
             } else {
                 res.redirect("/");
             }
