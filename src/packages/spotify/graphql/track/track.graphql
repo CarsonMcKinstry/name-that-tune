@@ -43,7 +43,72 @@ type AudioFeatures {
     valence: Float!
 }
 
+type RecommendationSeed {
+    afterFilteringSize: Int
+    afterRelinkingSize: Int
+    href: String
+    id: ID!
+    initialPoolSize: String
+    type: ItemType!
+}
+
+type Recommendations {
+    seeds: [RecommendationSeed!]!
+    tracks: [Track!]!
+}
+
+input RecommendationsInput {
+    seed_artists: [String!]
+    seed_genres: [String!]
+    seed_tracks: [String!]
+    limit: Int
+    market: String
+    max_acousticness: Float
+    max_danceability: Float
+    max_duration_ms: Int
+    max_energy: Float
+    max_instrumentalness: Float
+    max_key: Int
+    max_liveness: Float
+    max_loudness: Float
+    max_mode: Int
+    max_popularity: Int
+    max_speechiness: Float
+    max_tempo: Float
+    max_time_signature: Int
+    max_valence: Float
+    min_acousticness: Float
+    min_danceability: Float
+    min_duration_ms: Int
+    min_energy: Float
+    min_instrumentalness: Float
+    min_key: Int
+    min_liveness: Float
+    min_loudness: Float
+    min_mode: Int
+    min_popularity: Int
+    min_speechiness: Float
+    min_tempo: Float
+    min_time_signature: Int
+    min_valence: Float
+    target_acousticness: Float
+    target_danceability: Float
+    target_duration_ms: Int
+    target_energy: Float
+    target_instrumentalness: Float
+    target_key: Int
+    target_liveness: Float
+    target_loudness: Float
+    target_mode: Int
+    target_popularity: Int
+    target_speechiness: Float
+    target_tempo: Float
+    target_time_signature: Int
+    target_valence: Float
+}
+
 type Query {
     track(id: ID!, market: String): Track
     tracks(ids: [ID!]!, market: String): [Track!]!
+    recommendations(input: RecommendationsInput): Recommendations!
 }

@@ -319,6 +319,7 @@ export type Query = {
   me?: Maybe<Me>;
   newReleases: Albums;
   playlist?: Maybe<Playlist>;
+  recommendations: Recommendations;
   search?: Maybe<Search>;
   searchAlbums: Albums;
   searchArtists: Artists;
@@ -379,6 +380,11 @@ export type QueryPlaylistArgs = {
 };
 
 
+export type QueryRecommendationsArgs = {
+  input?: InputMaybe<RecommendationsInput>;
+};
+
+
 export type QuerySearchArgs = {
   include_external?: InputMaybe<Scalars['Boolean']>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -427,6 +433,72 @@ export type QueryTracksArgs = {
 
 export type QueryUserArgs = {
   id: Scalars['ID'];
+};
+
+export type RecommendationSeed = {
+  __typename?: 'RecommendationSeed';
+  afterFilteringSize?: Maybe<Scalars['Int']>;
+  afterRelinkingSize?: Maybe<Scalars['Int']>;
+  href?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  initialPoolSize?: Maybe<Scalars['String']>;
+  type: ItemType;
+};
+
+export type Recommendations = {
+  __typename?: 'Recommendations';
+  seeds: Array<RecommendationSeed>;
+  tracks: Array<Track>;
+};
+
+export type RecommendationsInput = {
+  limit?: InputMaybe<Scalars['Int']>;
+  market?: InputMaybe<Scalars['String']>;
+  max_acousticness?: InputMaybe<Scalars['Float']>;
+  max_danceability?: InputMaybe<Scalars['Float']>;
+  max_duration_ms?: InputMaybe<Scalars['Int']>;
+  max_energy?: InputMaybe<Scalars['Float']>;
+  max_instrumentalness?: InputMaybe<Scalars['Float']>;
+  max_key?: InputMaybe<Scalars['Int']>;
+  max_liveness?: InputMaybe<Scalars['Float']>;
+  max_loudness?: InputMaybe<Scalars['Float']>;
+  max_mode?: InputMaybe<Scalars['Int']>;
+  max_popularity?: InputMaybe<Scalars['Int']>;
+  max_speechiness?: InputMaybe<Scalars['Float']>;
+  max_tempo?: InputMaybe<Scalars['Float']>;
+  max_time_signature?: InputMaybe<Scalars['Int']>;
+  max_valence?: InputMaybe<Scalars['Float']>;
+  min_acousticness?: InputMaybe<Scalars['Float']>;
+  min_danceability?: InputMaybe<Scalars['Float']>;
+  min_duration_ms?: InputMaybe<Scalars['Int']>;
+  min_energy?: InputMaybe<Scalars['Float']>;
+  min_instrumentalness?: InputMaybe<Scalars['Float']>;
+  min_key?: InputMaybe<Scalars['Int']>;
+  min_liveness?: InputMaybe<Scalars['Float']>;
+  min_loudness?: InputMaybe<Scalars['Float']>;
+  min_mode?: InputMaybe<Scalars['Int']>;
+  min_popularity?: InputMaybe<Scalars['Int']>;
+  min_speechiness?: InputMaybe<Scalars['Float']>;
+  min_tempo?: InputMaybe<Scalars['Float']>;
+  min_time_signature?: InputMaybe<Scalars['Int']>;
+  min_valence?: InputMaybe<Scalars['Float']>;
+  seed_artists?: InputMaybe<Array<Scalars['String']>>;
+  seed_genres?: InputMaybe<Array<Scalars['String']>>;
+  seed_tracks?: InputMaybe<Array<Scalars['String']>>;
+  target_acousticness?: InputMaybe<Scalars['Float']>;
+  target_danceability?: InputMaybe<Scalars['Float']>;
+  target_duration_ms?: InputMaybe<Scalars['Int']>;
+  target_energy?: InputMaybe<Scalars['Float']>;
+  target_instrumentalness?: InputMaybe<Scalars['Float']>;
+  target_key?: InputMaybe<Scalars['Int']>;
+  target_liveness?: InputMaybe<Scalars['Float']>;
+  target_loudness?: InputMaybe<Scalars['Float']>;
+  target_mode?: InputMaybe<Scalars['Int']>;
+  target_popularity?: InputMaybe<Scalars['Int']>;
+  target_speechiness?: InputMaybe<Scalars['Float']>;
+  target_tempo?: InputMaybe<Scalars['Float']>;
+  target_time_signature?: InputMaybe<Scalars['Int']>;
+  target_valence?: InputMaybe<Scalars['Float']>;
 };
 
 export type RelatedArtists = {
@@ -624,6 +696,9 @@ export type ResolversTypes = {
   PlaylistTracks: ResolverTypeWrapper<PlaylistTracks>;
   Playlists: ResolverTypeWrapper<Playlists>;
   Query: ResolverTypeWrapper<{}>;
+  RecommendationSeed: ResolverTypeWrapper<RecommendationSeed>;
+  Recommendations: ResolverTypeWrapper<Recommendations>;
+  RecommendationsInput: RecommendationsInput;
   RelatedArtists: ResolverTypeWrapper<RelatedArtists>;
   RestrictionReason: RestrictionReason;
   Restrictions: ResolverTypeWrapper<Restrictions>;
@@ -664,6 +739,9 @@ export type ResolversParentTypes = {
   PlaylistTracks: PlaylistTracks;
   Playlists: Playlists;
   Query: {};
+  RecommendationSeed: RecommendationSeed;
+  Recommendations: Recommendations;
+  RecommendationsInput: RecommendationsInput;
   RelatedArtists: RelatedArtists;
   Restrictions: Restrictions;
   Search: Search;
@@ -895,6 +973,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   me?: Resolver<Maybe<ResolversTypes['Me']>, ParentType, ContextType>;
   newReleases?: Resolver<ResolversTypes['Albums'], ParentType, ContextType, RequireFields<QueryNewReleasesArgs, never>>;
   playlist?: Resolver<Maybe<ResolversTypes['Playlist']>, ParentType, ContextType, RequireFields<QueryPlaylistArgs, 'id'>>;
+  recommendations?: Resolver<ResolversTypes['Recommendations'], ParentType, ContextType, RequireFields<QueryRecommendationsArgs, never>>;
   search?: Resolver<Maybe<ResolversTypes['Search']>, ParentType, ContextType, RequireFields<QuerySearchArgs, 'query' | 'type'>>;
   searchAlbums?: Resolver<ResolversTypes['Albums'], ParentType, ContextType, RequireFields<QuerySearchAlbumsArgs, 'query'>>;
   searchArtists?: Resolver<ResolversTypes['Artists'], ParentType, ContextType, RequireFields<QuerySearchArtistsArgs, 'query'>>;
@@ -902,6 +981,22 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   track?: Resolver<Maybe<ResolversTypes['Track']>, ParentType, ContextType, RequireFields<QueryTrackArgs, 'id'>>;
   tracks?: Resolver<Array<ResolversTypes['Track']>, ParentType, ContextType, RequireFields<QueryTracksArgs, 'ids'>>;
   user?: Resolver<Maybe<ResolversTypes['UserProfile']>, ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
+};
+
+export type RecommendationSeedResolvers<ContextType = any, ParentType extends ResolversParentTypes['RecommendationSeed'] = ResolversParentTypes['RecommendationSeed']> = {
+  afterFilteringSize?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  afterRelinkingSize?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  href?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  initialPoolSize?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  type?: Resolver<ResolversTypes['ItemType'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type RecommendationsResolvers<ContextType = any, ParentType extends ResolversParentTypes['Recommendations'] = ResolversParentTypes['Recommendations']> = {
+  seeds?: Resolver<Array<ResolversTypes['RecommendationSeed']>, ParentType, ContextType>;
+  tracks?: Resolver<Array<ResolversTypes['Track']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type RelatedArtistsResolvers<ContextType = any, ParentType extends ResolversParentTypes['RelatedArtists'] = ResolversParentTypes['RelatedArtists']> = {
@@ -1005,6 +1100,8 @@ export type Resolvers<ContextType = any> = {
   PlaylistTracks?: PlaylistTracksResolvers<ContextType>;
   Playlists?: PlaylistsResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  RecommendationSeed?: RecommendationSeedResolvers<ContextType>;
+  Recommendations?: RecommendationsResolvers<ContextType>;
   RelatedArtists?: RelatedArtistsResolvers<ContextType>;
   Restrictions?: RestrictionsResolvers<ContextType>;
   Search?: SearchResolvers<ContextType>;

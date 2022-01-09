@@ -8,6 +8,9 @@ export const trackResolvers: ContextResolvers = {
         tracks(_parent, args, { dataSources }) {
             return dataSources.spotify.getTracks(args);
         },
+        recommendations(_parent, args, { dataSources }) {
+            return dataSources.spotify.getRecommendations(args);
+        },
     },
     Track: {
         id(parent) {

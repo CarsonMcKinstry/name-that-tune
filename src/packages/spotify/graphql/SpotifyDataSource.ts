@@ -27,12 +27,14 @@ import {
     QueryCategoryArgs,
     QueryNewReleasesArgs,
     QueryPlaylistArgs,
+    QueryRecommendationsArgs,
     QuerySearchAlbumsArgs,
     QuerySearchArgs,
     QuerySearchArtistsArgs,
     QuerySearchTracksArgs,
     QueryTrackArgs,
     QueryTracksArgs,
+    Recommendations,
     RelatedArtists,
     Search,
     TopTracks,
@@ -173,6 +175,12 @@ export class SpotifyDataSource extends RESTDataSource<ApolloSpotifyContext> {
         return this.get("/tracks", omitNil(args));
     }
 
+    public async getRecommendations({
+        input,
+    }: QueryRecommendationsArgs): Promise<Recommendations> {
+        return this.get("/recommendations", omitNil(input));
+    }
+
     public async getTracksForAlbum(
         id: string,
         args: Omit<AlbumTracksArgs, "id">
@@ -253,10 +261,16 @@ export class SpotifyDataSource extends RESTDataSource<ApolloSpotifyContext> {
     }
 
     public async getGenres(): Promise<string[]> {
-        return this.get("/recommendations/available-genre-seeds");
+        const { genres } = await this.get(
+            "/recommendations/available-genre-seeds"
+        );
+
+        return genres;
     }
     public async getMarkets(): Promise<string[]> {
-        return this.get("/markets");
+        const { markets } = await this.get("/markets");
+
+        return markets;
     }
 
     public async searchAlbums(
