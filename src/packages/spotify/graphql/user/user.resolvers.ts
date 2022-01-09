@@ -19,6 +19,9 @@ export const userResolvers: ContextResolvers = {
         playlists(_parent, args, { dataSources }) {
             return dataSources.spotify.getMyPlaylists(args);
         },
+        albums(_parent, args, { dataSources }) {
+            return dataSources.spotify.getMyAlbums(args);
+        },
     },
     UserProfile: {
         async followers(parent, _args, { dataSources }) {

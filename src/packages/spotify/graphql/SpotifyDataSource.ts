@@ -11,6 +11,7 @@ import {
     Category,
     ItemType,
     Me,
+    MeAlbumsArgs,
     MePlaylistsArgs,
     MeTop_ArtistsArgs,
     MeTop_TracksArgs,
@@ -65,12 +66,6 @@ export class SpotifyDataSource extends RESTDataSource<ApolloSpotifyContext> {
         return this.get("/me");
     }
 
-    public async getUser(id: string): Promise<UserProfile> {
-        const isSpotify = id === "";
-
-        return this.get(`/users/${isSpotify ? "spotify" : id}`);
-    }
-
     public async getMyTopArtists(
         args: MeTop_ArtistsArgs = {}
     ): Promise<Artists> {
@@ -107,6 +102,23 @@ export class SpotifyDataSource extends RESTDataSource<ApolloSpotifyContext> {
             ...rest,
             playlists: items,
         };
+    }
+
+    public async getMyAlbums(args: MeAlbumsArgs): Promise<Albums> {
+        const { albums } = await this.get("/me/albums", omitNil(args));
+        console.log(albums);
+        const { items, ...rest } = configurePagination<Album>(albums);
+
+        return {
+            albums: items,
+            ...rest,
+        };
+    }
+
+    public async getUser(id: string): Promise<UserProfile> {
+        const isSpotify = id === "";
+
+        return this.get(`/users/${isSpotify ? "spotify" : id}`);
     }
 
     public async getPlaylist(

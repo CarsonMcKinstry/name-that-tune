@@ -25,6 +25,8 @@ type Me implements User {
     top_artists(limit: Int, offset: Int, time_range: TimeRange): Artists!
     top_tracks(limit: Int, offset: Int, time_range: TimeRange): Tracks!
     playlists(limit: Int, offset: Int): Playlists!
+
+    albums(limit: Int, offset: Int, market: String): Albums!
 }
 
 type UserProfile implements User {

@@ -13,4 +13,5 @@ export const SPOTIFY_AUTH_HEADER = `Basic ${Buffer.from(
     `${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`
 ).toString("base64")}`;
 
-export const SCOPES = "user-read-private user-read-email";
+export const SCOPES =
+    "user-read-private user-read-email user-follow-read user-library-read playlist-read-collaborative playlist-read-private user-top-read";

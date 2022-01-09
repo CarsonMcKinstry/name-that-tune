@@ -195,6 +195,7 @@ export type LinkedFrom = {
 
 export type Me = User & {
   __typename?: 'Me';
+  albums: Albums;
   country?: Maybe<Scalars['String']>;
   display_name: Scalars['String'];
   email?: Maybe<Scalars['String']>;
@@ -209,6 +210,13 @@ export type Me = User & {
   top_tracks: Tracks;
   type: ObjectType;
   uri: Scalars['String'];
+};
+
+
+export type MeAlbumsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  market?: InputMaybe<Scalars['String']>;
+  offset?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -801,6 +809,7 @@ export type LinkedFromResolvers<ContextType = any, ParentType extends ResolversP
 };
 
 export type MeResolvers<ContextType = any, ParentType extends ResolversParentTypes['Me'] = ResolversParentTypes['Me']> = {
+  albums?: Resolver<ResolversTypes['Albums'], ParentType, ContextType, RequireFields<MeAlbumsArgs, never>>;
   country?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   display_name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
