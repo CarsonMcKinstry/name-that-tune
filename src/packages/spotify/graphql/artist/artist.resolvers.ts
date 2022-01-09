@@ -70,5 +70,16 @@ export const artistResolvers: ContextResolvers = {
 
             return dataSources.spotify.getAlbumsForArtist(parent.id, args);
         },
+        async top_tracks(parent, args, { dataSources }) {
+            if (!parent.id) return null;
+
+            return dataSources.spotify.getTopTracksForArtist(parent.id, args);
+        },
+
+        async related_artists(parent, _args, { dataSources }) {
+            if (!parent.id) return null;
+
+            return dataSources.spotify.getRelatedArtists(parent.id);
+        },
     },
 };

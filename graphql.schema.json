@@ -541,13 +541,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "ID",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -613,13 +609,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "RelatedArtists",
-                "ofType": null
-              }
+              "kind": "OBJECT",
+              "name": "RelatedArtists",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -646,13 +638,9 @@
               }
             ],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "TopTracks",
-                "ofType": null
-              }
+              "kind": "OBJECT",
+              "name": "TopTracks",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null

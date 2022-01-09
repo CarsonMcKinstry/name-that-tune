@@ -17,6 +17,6 @@ type Artist implements Item {
     external_urls: ExternalUrls!
     images: [Image!]!
     albums(limit: Int, offset: Int, market: String): Albums!
-    top_tracks(market: String!): TopTracks!
-    related_artists: RelatedArtists!
+    top_tracks(market: String!): TopTracks
+    related_artists: RelatedArtists
 }

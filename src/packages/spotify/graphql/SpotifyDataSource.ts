@@ -5,9 +5,11 @@ import {
     Artist,
     ArtistAlbumsArgs,
     Artists,
+    ArtistTop_TracksArgs,
     AudioFeatures,
     Categories,
     Category,
+    ItemType,
     Me,
     MePlaylistsArgs,
     MeTop_ArtistsArgs,
@@ -24,8 +26,15 @@ import {
     QueryCategoryArgs,
     QueryNewReleasesArgs,
     QueryPlaylistArgs,
+    QuerySearchAlbumsArgs,
+    QuerySearchArgs,
+    QuerySearchArtistsArgs,
+    QuerySearchTracksArgs,
     QueryTrackArgs,
     QueryTracksArgs,
+    RelatedArtists,
+    Search,
+    TopTracks,
     Track,
     Tracks,
     UserProfile,
@@ -203,6 +212,16 @@ export class SpotifyDataSource extends RESTDataSource<ApolloSpotifyContext> {
         };
     }
 
+    public async getTopTracksForArtist(
+        id: string,
+        args: ArtistTop_TracksArgs
+    ): Promise<TopTracks> {
+        return this.get(`/artists/${id}/top-tracks`, omitNil(args));
+    }
+    public async getRelatedArtists(id: string): Promise<RelatedArtists> {
+        return this.get(`/artists/${id}/related-artists`);
+    }
+
     public async getCategory(
         id: string,
         args: Omit<QueryCategoryArgs, "id">
@@ -226,5 +245,104 @@ export class SpotifyDataSource extends RESTDataSource<ApolloSpotifyContext> {
     }
     public async getMarkets(): Promise<string[]> {
         return this.get("/markets");
+    }
+
+    public async searchAlbums(
+        query: string,
+        args: Omit<QuerySearchAlbumsArgs, "query">
+    ): Promise<Albums> {
+        const { albums } = await this.search(query, {
+            ...args,
+            type: [ItemType.Album],
+        });
+
+        return (
+            albums ?? {
+                total: 0,
+                limit: 0,
+                offset: 0,
+                albums: [],
+                next: null,
+                previous: null,
+            }
+        );
+    }
+    public async searchArtists(
+        query: string,
+        args: Omit<QuerySearchArtistsArgs, "query">
+    ): Promise<Artists> {
+        const { artists } = await this.search(query, {
+            ...args,
+            type: [ItemType.Artist],
+        });
+
+        return (
+            artists ?? {
+                total: 0,
+                limit: 0,
+                offset: 0,
+                artists: [],
+                next: null,
+                previous: null,
+            }
+        );
+    }
+
+    public async searchTracks(
+        query: string,
+        args: Omit<QuerySearchTracksArgs, "query">
+    ): Promise<Tracks> {
+        const { tracks } = await this.search(query, {
+            ...args,
+            type: [ItemType.Track],
+        });
+
+        return (
+            tracks ?? {
+                total: 0,
+                limit: 0,
+                offset: 0,
+                tracks: [],
+                next: null,
+                previous: null,
+            }
+        );
+    }
+
+    public async search(
+        query: string,
+        args: Omit<QuerySearchArgs, "query">
+    ): Promise<Search> {
+        const { tracks, artists, albums } = await this.get(
+            "/search",
+            omitNil({
+                q: query,
+                ...args,
+            })
+        );
+
+        const { items: trackItems, ...trackRest } = configurePagination<Track>(
+            tracks ?? {}
+        );
+        const { items: artistItems, ...artistRest } =
+            configurePagination<Artist>(artists ?? {});
+        const { items: albumItems, ...albumRest } = configurePagination<Album>(
+            albums ?? {}
+        );
+
+        return {
+            tracks: {
+                ...trackRest,
+                tracks: trackItems,
+            },
+            artists: {
+                ...artistRest,
+                artists: artistItems,
+            },
+            albums: {
+                ...albumRest,
+                albums: albumItems,
+            },
+        };
     }
 }
