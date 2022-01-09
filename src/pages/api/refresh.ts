@@ -9,10 +9,13 @@ import nookies from "nookies";
 const handler: NextApiHandler = async (req, res) => {
     const {
         query: { redirect },
+        headers,
     } = req;
     const { [SPOTIFY_REFRESH_TOKEN_COOKIE]: refreshToken } = nookies.get({
         req,
     });
+
+    const { accept } = headers;
 
     try {
         if (!refreshToken) throw new Error();
@@ -28,10 +31,14 @@ const handler: NextApiHandler = async (req, res) => {
             path: "/api",
         });
 
-        if (redirect) {
-            res.redirect(`/${redirect}`);
+        if (accept === "application/json") {
+            res.json({ access_token });
         } else {
-            res.redirect("/");
+            if (redirect) {
+                res.redirect(`/${redirect}`);
+            } else {
+                res.redirect("/");
+            }
         }
     } catch (err) {
         res.redirect("/");

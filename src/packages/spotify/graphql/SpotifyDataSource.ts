@@ -45,7 +45,7 @@ import {
 import { omitNil } from "@packages/utils";
 import { configurePagination } from "@packages/utils/configurePagination";
 import { RequestOptions, RESTDataSource } from "apollo-datasource-rest";
-import { ForbiddenError } from "apollo-server-errors";
+import { AuthenticationError } from "apollo-server-errors";
 import { SPOTIFY_API_BASE_URL } from "..";
 import { ApolloSpotifyContext } from "../types";
 import DataLoader from "dataloader";
@@ -55,7 +55,7 @@ export class SpotifyDataSource extends RESTDataSource<ApolloSpotifyContext> {
 
     private checkAuth() {
         if (!this.context.spotifyAccessToken) {
-            throw new ForbiddenError("user not authenticated");
+            throw new AuthenticationError("user not authenticated");
         }
     }
 

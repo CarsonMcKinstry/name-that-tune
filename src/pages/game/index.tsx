@@ -1,30 +1,43 @@
-import { getAuthPropsFromContext } from "@packages/spotify/auth/getAuthProps";
-import { AuthProps, AuthProvider } from "@packages/spotify";
+// import { getAuthPropsFromContext } from "@packages/spotify/auth/getAuthProps";
+// import { AuthProps, AuthProvider } from "@packages/spotify";
 import { GetServerSideProps, NextPage } from "next";
 
-type GameHomeProps = AuthProps & {
+// type GameHomeProps = AuthProps & {
 
-}
+// }
 
-const GameHome: NextPage<GameHomeProps> = ({ accessToken }) => {
+import { SPOTIFY_ACCESS_TOKEN_COOKIE } from '@packages/spotify';
+import { parseCookies } from 'nookies';
+import gql from 'graphql-tag';
+import { useQuery } from "@apollo/client";
+
+const getMe = gql`
+    query Me {
+        me {
+            id
+            display_name
+        }
+    }
+`;
+
+const GameHome: NextPage = () => {
+    const { data, loading } = useQuery(getMe);
+
     return (
-        <AuthProvider accessToken={accessToken}>
-            <div>
-                <pre>
-                    {accessToken}
-                </pre>
-                <a href="/api/logout">
-                    Logout
-                </a>
-            </div>
-        </AuthProvider>
+        <div>
+            <a href="/api/logout">Logout</a>
+            {loading && <p>Loading...</p>}
+            {!loading && <p>Hello, {data.me.display_name}</p>}
+        </div>
     )
 }
 
-export const getServerSideProps: GetServerSideProps<GameHomeProps> = async (context) => {
-    const authProps = await getAuthPropsFromContext(context);
+export default GameHome;
 
-    if (!authProps.accessToken) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const cookies = parseCookies(context);
+
+    if (!cookies[SPOTIFY_ACCESS_TOKEN_COOKIE]) {
         return {
             redirect: {
                 destination: '/api/refresh?redirect=game',
@@ -35,9 +48,7 @@ export const getServerSideProps: GetServerSideProps<GameHomeProps> = async (cont
 
     return {
         props: {
-            ...authProps,
+
         }
     }
 }
-
-export default GameHome;
