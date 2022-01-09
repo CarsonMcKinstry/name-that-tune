@@ -13,6 +13,9 @@ const GameHome: NextPage<GameHomeProps> = ({ accessToken }) => {
                 <pre>
                     {accessToken}
                 </pre>
+                <a href="/api/logout">
+                    Logout
+                </a>
             </div>
         </AuthProvider>
     )

@@ -25,7 +25,7 @@ const handler: NextApiHandler = async (req, res) => {
             expires: new Date(Date.now() + expires_in * 1000),
         });
         nookies.set({ res }, SPOTIFY_REFRESH_TOKEN_COOKIE, refresh_token, {
-            path: "/api/refresh",
+            path: "/api",
         });
 
         if (redirect) {
