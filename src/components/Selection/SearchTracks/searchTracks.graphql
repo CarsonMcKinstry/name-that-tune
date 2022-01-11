@@ -1,0 +1,27 @@
+query SearchTracks($query: String!, $limit: Int, $offset: Int) {
+    searchTracks(query: $query, limit: $limit, offset: $offset) {
+        limit
+        offset
+        total
+        next
+        tracks {
+            id
+            name
+            artists {
+                name
+                id
+            }
+            preview_url
+            is_local
+            album {
+                name
+                id
+                images {
+                    url
+                    height
+                    width
+                }
+            }
+        }
+    }
+}

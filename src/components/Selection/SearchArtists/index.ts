@@ -1,0 +1,1 @@
+export { SearchArtists } from "./SearchArtists";

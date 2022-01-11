@@ -7,8 +7,8 @@ export const TopArtists: FC = () => {
     const { data, loading } = useMyTopArtistsQuery();
 
     const artists = useMemo(() => {
-        return loading ? [] : data?.me?.top_artists.artists ?? [];
-    }, [data, loading])
+        return data?.me?.top_artists.artists ?? [];
+    }, [data]);
 
     return (
         <div>

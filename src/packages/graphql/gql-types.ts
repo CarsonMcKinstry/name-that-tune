@@ -596,6 +596,24 @@ export type UserProfilePlaylistsArgs = {
   offset?: InputMaybe<Scalars['Int']>;
 };
 
+export type SearchArtistsQueryVariables = Exact<{
+  query: Scalars['String'];
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type SearchArtistsQuery = { __typename?: 'Query', searchArtists: { __typename?: 'Artists', offset: number, limit: number, total: number, next?: number | null | undefined, artists: Array<{ __typename?: 'Artist', id?: string | null | undefined, name: string, images: Array<{ __typename?: 'Image', url: string, height?: number | null | undefined, width?: number | null | undefined }> }> } };
+
+export type SearchTracksQueryVariables = Exact<{
+  query: Scalars['String'];
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type SearchTracksQuery = { __typename?: 'Query', searchTracks: { __typename?: 'Tracks', limit: number, offset: number, total: number, next?: number | null | undefined, tracks: Array<{ __typename?: 'Track', id: string, name: string, preview_url?: string | null | undefined, is_local: boolean, artists: Array<{ __typename?: 'Artist', name: string, id?: string | null | undefined }>, album?: { __typename?: 'Album', name: string, id?: string | null | undefined, images: Array<{ __typename?: 'Image', url: string, height?: number | null | undefined, width?: number | null | undefined }> } | null | undefined }> } };
+
 export type MyTopArtistsQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -603,6 +621,14 @@ export type MyTopArtistsQueryVariables = Exact<{
 
 
 export type MyTopArtistsQuery = { __typename?: 'Query', me?: { __typename?: 'Me', top_artists: { __typename?: 'Artists', limit: number, offset: number, next?: number | null | undefined, total: number, artists: Array<{ __typename?: 'Artist', name: string, id?: string | null | undefined, images: Array<{ __typename?: 'Image', url: string, height?: number | null | undefined, width?: number | null | undefined }> }> } } | null | undefined };
+
+export type MyTopTracksQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type MyTopTracksQuery = { __typename?: 'Query', me?: { __typename?: 'Me', top_tracks: { __typename?: 'Tracks', limit: number, offset: number, next?: number | null | undefined, total: number, tracks: Array<{ __typename?: 'Track', id: string, name: string, is_local: boolean, preview_url?: string | null | undefined, album?: { __typename?: 'Album', id?: string | null | undefined, name: string, images: Array<{ __typename?: 'Image', url: string, height?: number | null | undefined, width?: number | null | undefined }> } | null | undefined, artists: Array<{ __typename?: 'Artist', id?: string | null | undefined, name: string }> }> } } | null | undefined };
 
 
 

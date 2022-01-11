@@ -1,0 +1,29 @@
+query MyTopTracks($limit: Int, $offset: Int) {
+    me {
+        top_tracks(limit: $limit, offset: $offset) {
+            limit
+            offset
+            next
+            total
+            tracks {
+                id
+                name
+                album {
+                    id
+                    name
+                    images {
+                        url
+                        height
+                        width
+                    }
+                }
+                artists {
+                    id
+                    name
+                }
+                is_local
+                preview_url
+            }
+        }
+    }
+}

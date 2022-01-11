@@ -1,13 +1,21 @@
-import { TopArtists } from 'components/Selection';
-import { NextPage } from 'next';
+import {
+    SearchArtists,
+    SearchTracks,
+    TopArtists,
+    TopTracks,
+} from "components/Selection";
+import { NextPage } from "next";
 
 const NewGame: NextPage = () => {
     return (
         <div>
             <h2>New Game</h2>
-            <TopArtists />
+            {/* <TopArtists /> */}
+            <TopTracks />
+            {/* <SearchArtists /> */}
+            {/* <SearchTracks /> */}
         </div>
-    )
+    );
 };
 
 export default NewGame;

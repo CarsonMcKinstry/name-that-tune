@@ -13,6 +13,15 @@ export const trackResolvers: ContextResolvers = {
         },
     },
     Track: {
+        async is_playable(parent, _args, { dataSources }) {
+            if (parent.is_playable) return !!parent.is_playable;
+
+            if (!parent.id || parent.id === parent.uri) return null;
+
+            const track = await dataSources.spotify.getTrack(parent.id);
+            console.log(track.is_playable);
+            return !!track.is_playable;
+        },
         id(parent) {
             const { id, uri } = parent;
             if (id) return id;
