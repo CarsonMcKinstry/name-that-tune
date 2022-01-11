@@ -1,16 +1,14 @@
-import { Artist, Image } from "@packages/graphql";
+import { Image } from "@packages/graphql";
 import { clamp } from "@packages/utils";
 import { FC, useMemo } from "react";
 import { useArtistQuery } from "./artist.hook";
 
-type ArtistPortraitProps = {
+type ArtistProps = {
     artistId: string;
 };
 
 const DEFAULT_ARTIST_IMAGE =
     "https://avataaars.io/?avatarStyle=Circle&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=BrownDark&facialHairType=BeardLight&facialHairColor=BrownDark&clotheType=Hoodie&clotheColor=PastelGreen02&eyeType=Happy&eyebrowType=RaisedExcited&mouthType=Smile&skinColor=Light";
-
-const artistImageClamp = clamp(160);
 
 const getLargestImage = (images: Image[]) => {
     if (!images.length) {
@@ -40,7 +38,7 @@ const getLargestImage = (images: Image[]) => {
     return largest.image;
 };
 
-export const ArtistPortrait: FC<ArtistPortraitProps> = ({ artistId }) => {
+export const Artist: FC<ArtistProps> = ({ artistId }) => {
     const { data, loading, error } = useArtistQuery({
         variables: { artistId },
     });
@@ -55,20 +53,14 @@ export const ArtistPortrait: FC<ArtistPortraitProps> = ({ artistId }) => {
 
     const { name, images } = artist;
 
-    const {
-        url = DEFAULT_ARTIST_IMAGE,
-        height = 160,
-        width = 160,
-    } = getLargestImage(images);
+    const { url = DEFAULT_ARTIST_IMAGE } = getLargestImage(images);
 
     return (
-        <div>
-            <img
-                src={url}
-                height={artistImageClamp(height!)}
-                width={artistImageClamp(width!)}
-            />
-            <p>{name}</p>
+        <div className="flex items-center p-3">
+            <img className="w-12 h-12 rounded-full" src={url} />
+            <p className="text-slate-50 pl-3 font-medium text-s truncate pr-8">
+                {name}
+            </p>
         </div>
     );
 };

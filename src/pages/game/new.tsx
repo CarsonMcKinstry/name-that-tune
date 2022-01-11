@@ -10,10 +10,12 @@ const NewGame: NextPage = () => {
     return (
         <div>
             <h2>New Game</h2>
+            {/* <TopTracks /> */}
             <TopArtists />
-            <TopTracks />
+            {/* 
+            
             <SearchArtists />
-            <SearchTracks />
+            <SearchTracks /> */}
         </div>
     );
 };
