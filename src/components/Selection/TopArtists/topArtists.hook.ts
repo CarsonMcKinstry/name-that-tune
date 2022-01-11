@@ -9,7 +9,7 @@ export type MyTopArtistsQueryVariables = Types.Exact<{
 }>;
 
 
-export type MyTopArtistsQuery = { __typename?: 'Query', me?: { __typename?: 'Me', top_artists: { __typename?: 'Artists', limit: number, offset: number, next?: number | null | undefined, total: number, artists: Array<{ __typename?: 'Artist', name: string, id?: string | null | undefined, images: Array<{ __typename?: 'Image', url: string, height?: number | null | undefined, width?: number | null | undefined }> }> } } | null | undefined };
+export type MyTopArtistsQuery = { __typename?: 'Query', me?: { __typename?: 'Me', top_artists: { __typename?: 'Artists', limit: number, offset: number, next?: number | null | undefined, total: number, artists: Array<{ __typename?: 'Artist', id?: string | null | undefined }> } } | null | undefined };
 
 
 export const MyTopArtistsDocument = gql`
@@ -21,13 +21,7 @@ export const MyTopArtistsDocument = gql`
       next
       total
       artists {
-        name
         id
-        images {
-          url
-          height
-          width
-        }
       }
     }
   }

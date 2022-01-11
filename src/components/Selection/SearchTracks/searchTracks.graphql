@@ -6,22 +6,7 @@ query SearchTracks($query: String!, $limit: Int, $offset: Int) {
         next
         tracks {
             id
-            name
-            artists {
-                name
-                id
-            }
-            preview_url
             is_local
-            album {
-                name
-                id
-                images {
-                    url
-                    height
-                    width
-                }
-            }
         }
     }
 }

@@ -7,22 +7,7 @@ query MyTopTracks($limit: Int, $offset: Int) {
             total
             tracks {
                 id
-                name
-                album {
-                    id
-                    name
-                    images {
-                        url
-                        height
-                        width
-                    }
-                }
-                artists {
-                    id
-                    name
-                }
                 is_local
-                preview_url
             }
         }
     }

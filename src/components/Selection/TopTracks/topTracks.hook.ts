@@ -9,7 +9,7 @@ export type MyTopTracksQueryVariables = Types.Exact<{
 }>;
 
 
-export type MyTopTracksQuery = { __typename?: 'Query', me?: { __typename?: 'Me', top_tracks: { __typename?: 'Tracks', limit: number, offset: number, next?: number | null | undefined, total: number, tracks: Array<{ __typename?: 'Track', id: string, name: string, is_local: boolean, preview_url?: string | null | undefined, album?: { __typename?: 'Album', id?: string | null | undefined, name: string, images: Array<{ __typename?: 'Image', url: string, height?: number | null | undefined, width?: number | null | undefined }> } | null | undefined, artists: Array<{ __typename?: 'Artist', id?: string | null | undefined, name: string }> }> } } | null | undefined };
+export type MyTopTracksQuery = { __typename?: 'Query', me?: { __typename?: 'Me', top_tracks: { __typename?: 'Tracks', limit: number, offset: number, next?: number | null | undefined, total: number, tracks: Array<{ __typename?: 'Track', id: string, is_local: boolean }> } } | null | undefined };
 
 
 export const MyTopTracksDocument = gql`
@@ -22,22 +22,7 @@ export const MyTopTracksDocument = gql`
       total
       tracks {
         id
-        name
-        album {
-          id
-          name
-          images {
-            url
-            height
-            width
-          }
-        }
-        artists {
-          id
-          name
-        }
         is_local
-        preview_url
       }
     }
   }

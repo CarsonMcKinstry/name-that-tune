@@ -1,3 +1,4 @@
+import { Track } from "components/Track";
 import { FC, useMemo } from "react";
 import { useMyTopTracksQuery } from "./topTracks.hook";
 
@@ -12,7 +13,9 @@ export const TopTracks: FC = () => {
 
     return (
         <div>
-            <pre>{JSON.stringify(tracks, null, 4)}</pre>
+            {tracks.map((track) => (
+                <Track trackId={track.id} key={track.id} />
+            ))}
         </div>
     );
 };

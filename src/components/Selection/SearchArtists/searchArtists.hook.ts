@@ -10,7 +10,7 @@ export type SearchArtistsQueryVariables = Types.Exact<{
 }>;
 
 
-export type SearchArtistsQuery = { __typename?: 'Query', searchArtists: { __typename?: 'Artists', offset: number, limit: number, total: number, next?: number | null | undefined, artists: Array<{ __typename?: 'Artist', id?: string | null | undefined, name: string, images: Array<{ __typename?: 'Image', url: string, height?: number | null | undefined, width?: number | null | undefined }> }> } };
+export type SearchArtistsQuery = { __typename?: 'Query', searchArtists: { __typename?: 'Artists', offset: number, limit: number, total: number, next?: number | null | undefined, artists: Array<{ __typename?: 'Artist', id?: string | null | undefined }> } };
 
 
 export const SearchArtistsDocument = gql`
@@ -22,12 +22,6 @@ export const SearchArtistsDocument = gql`
     next
     artists {
       id
-      name
-      images {
-        url
-        height
-        width
-      }
     }
   }
 }

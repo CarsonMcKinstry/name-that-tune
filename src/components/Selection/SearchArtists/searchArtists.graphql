@@ -6,12 +6,6 @@ query SearchArtists($query: String!, $limit: Int, $offset: Int) {
         next
         artists {
             id
-            name
-            images {
-                url
-                height
-                width
-            }
         }
     }
 }

@@ -24,7 +24,9 @@ export const SearchArtists: FC = () => {
     };
 
     const artists = useMemo(() => {
-        return data?.searchArtists.artists ?? [];
+        const artists = data?.searchArtists.artists ?? [];
+
+        return artists.filter((artist) => !!artist.id);
     }, [data]);
 
     return (
@@ -36,7 +38,7 @@ export const SearchArtists: FC = () => {
             />
             <div>
                 {artists.map((artist) => (
-                    <ArtistPortrait {...artist} key={artist.id} />
+                    <ArtistPortrait artistId={artist.id!} key={artist.id} />
                 ))}
             </div>
         </div>

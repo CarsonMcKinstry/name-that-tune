@@ -10,7 +10,7 @@ export type SearchTracksQueryVariables = Types.Exact<{
 }>;
 
 
-export type SearchTracksQuery = { __typename?: 'Query', searchTracks: { __typename?: 'Tracks', limit: number, offset: number, total: number, next?: number | null | undefined, tracks: Array<{ __typename?: 'Track', id: string, name: string, preview_url?: string | null | undefined, is_local: boolean, artists: Array<{ __typename?: 'Artist', name: string, id?: string | null | undefined }>, album?: { __typename?: 'Album', name: string, id?: string | null | undefined, images: Array<{ __typename?: 'Image', url: string, height?: number | null | undefined, width?: number | null | undefined }> } | null | undefined }> } };
+export type SearchTracksQuery = { __typename?: 'Query', searchTracks: { __typename?: 'Tracks', limit: number, offset: number, total: number, next?: number | null | undefined, tracks: Array<{ __typename?: 'Track', id: string, is_local: boolean }> } };
 
 
 export const SearchTracksDocument = gql`
@@ -22,22 +22,7 @@ export const SearchTracksDocument = gql`
     next
     tracks {
       id
-      name
-      artists {
-        name
-        id
-      }
-      preview_url
       is_local
-      album {
-        name
-        id
-        images {
-          url
-          height
-          width
-        }
-      }
     }
   }
 }

@@ -1,0 +1,11 @@
+query Artist($artistId: ID!) {
+    artist(id: $artistId) {
+        id
+        name
+        images {
+            url
+            height
+            width
+        }
+    }
+}

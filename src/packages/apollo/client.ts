@@ -15,7 +15,25 @@ export function getApolloClient(forceNew: boolean = false) {
         CLIENT = new ApolloClient({
             ssrMode: isServerSide,
             link,
-            cache: new InMemoryCache(),
+            cache: new InMemoryCache({
+                typePolicies: {
+                    Me: {
+                        merge: true,
+                    },
+                    Artist: {
+                        merge: true,
+                    },
+                    Track: {
+                        merge: true,
+                    },
+                    Album: {
+                        merge: true,
+                    },
+                    Playlist: {
+                        merge: true,
+                    },
+                },
+            }),
         });
     }
 

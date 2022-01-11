@@ -1,6 +1,7 @@
 import { FC, useCallback, useState, ChangeEventHandler, useMemo } from "react";
 import { debounce } from "lodash";
 import { useSearchTracksLazyQuery } from "./searchTracks.hook";
+import { Track } from "components/Track";
 
 export const SearchTracks: FC = () => {
     const [search, { data }] = useSearchTracksLazyQuery();
@@ -36,7 +37,9 @@ export const SearchTracks: FC = () => {
                 value={value}
             />
             <div>
-                <pre>{JSON.stringify(tracks, null, 4)}</pre>
+                {tracks.map((track) => (
+                    <Track trackId={track.id} key={track.id} />
+                ))}
             </div>
         </div>
     );
