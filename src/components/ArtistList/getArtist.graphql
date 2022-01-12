@@ -1,4 +1,4 @@
-query Artist($artistId: ID!) {
+query GetArtist($artistId: ID!) {
     artist(id: $artistId) {
         id
         name

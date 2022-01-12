@@ -603,6 +603,13 @@ export type ArtistQueryVariables = Exact<{
 
 export type ArtistQuery = { __typename?: 'Query', artist?: { __typename?: 'Artist', id?: string | null | undefined, name: string, images: Array<{ __typename?: 'Image', url: string, height?: number | null | undefined, width?: number | null | undefined }> } | null | undefined };
 
+export type GetArtistQueryVariables = Exact<{
+  artistId: Scalars['ID'];
+}>;
+
+
+export type GetArtistQuery = { __typename?: 'Query', artist?: { __typename?: 'Artist', id?: string | null | undefined, name: string, images: Array<{ __typename?: 'Image', url: string, height?: number | null | undefined, width?: number | null | undefined }> } | null | undefined };
+
 export type SearchArtistsQueryVariables = Exact<{
   query: Scalars['String'];
   limit?: InputMaybe<Scalars['Int']>;

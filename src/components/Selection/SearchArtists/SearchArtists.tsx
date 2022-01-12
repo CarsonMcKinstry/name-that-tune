@@ -1,7 +1,12 @@
 import { ChangeEventHandler, FC, useCallback, useMemo, useState } from "react";
 import { useSearchArtistsLazyQuery } from "./searchArtists.hook";
 import { debounce } from "lodash";
-import { Artist } from "components/Artist";
+import {
+    ArtistList,
+    ArtistRow,
+    ArtistName,
+    ArtistPortrait,
+} from "components/ArtistList";
 
 export const SearchArtists: FC = () => {
     const [search, { data, loading, error }] = useSearchArtistsLazyQuery();
@@ -36,11 +41,14 @@ export const SearchArtists: FC = () => {
                 onChange={handleChange}
                 value={value}
             />
-            <div>
-                {artists.map((artist) => (
-                    <Artist artistId={artist.id!} key={artist.id} />
+            <ArtistList>
+                {artists.map(({ id }) => (
+                    <ArtistRow artistId={id!} key={id}>
+                        <ArtistPortrait />
+                        <ArtistName />
+                    </ArtistRow>
                 ))}
-            </div>
+            </ArtistList>
         </div>
     );
 };

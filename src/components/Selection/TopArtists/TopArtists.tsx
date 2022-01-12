@@ -1,4 +1,9 @@
-import { Artist } from "components/Artist";
+import {
+    ArtistList,
+    ArtistRow,
+    ArtistName,
+    ArtistPortrait,
+} from "components/ArtistList";
 import { FC, useMemo } from "react";
 
 import { useMyTopArtistsQuery } from "./topArtists.hook";
@@ -13,10 +18,13 @@ export const TopArtists: FC = () => {
     }, [data]);
 
     return (
-        <div>
-            {artists.map((artist) => (
-                <Artist artistId={artist.id!} key={artist.id} />
+        <ArtistList>
+            {artists.map(({ id }) => (
+                <ArtistRow artistId={id!} key={id}>
+                    <ArtistPortrait />
+                    <ArtistName />
+                </ArtistRow>
             ))}
-        </div>
+        </ArtistList>
     );
 };
