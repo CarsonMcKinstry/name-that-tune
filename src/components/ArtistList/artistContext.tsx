@@ -2,10 +2,6 @@ import { Image } from "@packages/graphql";
 import { Nullable } from "@packages/types";
 import { createContext, useContext } from "react";
 
-import { GetArtistQuery } from "./getArtist.hook";
-
-type Artist = GetArtistQuery["artist"];
-
 interface ArtistContext {
     name: string;
     image: Image;

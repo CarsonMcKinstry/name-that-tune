@@ -1,0 +1,26 @@
+@use 'styles/colors';
+@use 'styles/spacing';
+@use 'styles/typography';
+
+.artistRow {
+    padding: spacing.$spacing-2;
+    display: flex;
+    align-items: center;
+    transition-duration: 100ms;
+    &:hover,
+    &:focus {
+        background-color: colors.$zinc-900;
+    }
+}
+
+.artistPortrait {
+    height: spacing.$spacing-14;
+    width: spacing.$spacing-14;
+    border-radius: 100%;
+}
+
+.artistName {
+    padding: spacing.$spacing-2 spacing.$spacing-4;
+    @include typography.font-medium;
+    @include typography.tracking-wider;
+}

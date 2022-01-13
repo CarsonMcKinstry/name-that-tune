@@ -1,7 +1,4 @@
-import {
-    SPOTIFY_ACCESS_TOKEN_COOKIE,
-    SPOTIFY_REFRESH_TOKEN_COOKIE,
-} from "@packages/spotify";
+import { SPOTIFY_ACCESS_TOKEN_COOKIE } from "@packages/spotify";
 import { NextFetchEvent, NextRequest, NextResponse } from "next/server";
 
 export function middleware(req: NextRequest, ev: NextFetchEvent) {

@@ -9,7 +9,7 @@ import { FC, useMemo } from "react";
 import { useMyTopArtistsQuery } from "./topArtists.hook";
 
 export const TopArtists: FC = () => {
-    const { data, loading } = useMyTopArtistsQuery();
+    const { data } = useMyTopArtistsQuery();
 
     const artists = useMemo(() => {
         const artists = data?.me?.top_artists.artists ?? [];

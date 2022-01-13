@@ -1,3 +1,5 @@
+@use "colors";
+
 /*! tailwindcss v2.2.19 | MIT License | https://tailwindcss.com */
 
 /*! modern-normalize v1.1.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
@@ -24,6 +26,7 @@ Use a more readable tab size (opinionated).
 html {
     -moz-tab-size: 4;
     tab-size: 4;
+    color: colors.$slate-50;
 }
 
 /**
@@ -555,6 +558,9 @@ video {
 *,
 ::before,
 ::after {
-    --tw-border-opacity: 1;
-    border-color: rgba(229, 231, 235, var(--tw-border-opacity));
+    border-color: rgba(229, 231, 235, 1);
+}
+
+body {
+    background-color: colors.$zinc-800;
 }

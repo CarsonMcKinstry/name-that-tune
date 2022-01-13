@@ -1,5 +1,6 @@
-import { GetServerSideProps, NextPage } from "next";
-import gql from 'graphql-tag';
+import { NextPage } from "next";
+import Link from "next/link";
+import gql from "graphql-tag";
 import { useQuery } from "@apollo/client";
 
 const getMe = gql`
@@ -16,12 +17,12 @@ const GameHome: NextPage = () => {
 
     return (
         <div>
-            <a href="/api/logout">Logout</a>
+            <Link href="/api/logout">Logout</Link>
             {loading && <p>Loading...</p>}
             {!loading && <p>Hello, {data.me.display_name}</p>}
-            <a href="/game/new">New Game</a>
+            <Link href="/game/new">New Game</Link>
         </div>
-    )
-}
+    );
+};
 
 export default GameHome;

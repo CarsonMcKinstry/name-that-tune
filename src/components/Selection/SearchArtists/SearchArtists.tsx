@@ -9,7 +9,7 @@ import {
 } from "components/ArtistList";
 
 export const SearchArtists: FC = () => {
-    const [search, { data, loading, error }] = useSearchArtistsLazyQuery();
+    const [search, { data }] = useSearchArtistsLazyQuery();
     const [value, setValue] = useState("");
 
     const performSearch = useCallback(

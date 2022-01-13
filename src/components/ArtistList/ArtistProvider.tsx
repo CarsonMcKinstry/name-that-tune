@@ -1,4 +1,4 @@
-import { FC, useMemo } from "react";
+import { FC } from "react";
 import { useGetArtistQuery } from "./getArtist.hook";
 import { artistContext } from "./artistContext";
 import { Image } from "@packages/graphql";
