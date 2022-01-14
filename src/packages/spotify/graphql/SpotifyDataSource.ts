@@ -217,7 +217,7 @@ export class SpotifyDataSource extends RESTDataSource<ApolloSpotifyContext> {
     id: string,
     args: Omit<ArtistAlbumsArgs, "id">
   ): Promise<Albums> {
-    const albums = await this.get(`/artists/${id}/albums`);
+    const albums = await this.get(`/artists/${id}/albums`, omitNil(args));
 
     const { items, ...rest } = configurePagination<Album>(albums);
 

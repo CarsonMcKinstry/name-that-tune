@@ -2,7 +2,6 @@
     "extends": "next/core-web-vitals",
     "rules": {
         "@next/next/no-server-import-in-page": "off",
-        "@next/next/no-img-element": "off",
-        "no-unused-vars": "error"
+        "@next/next/no-img-element": "off"
     }
 }

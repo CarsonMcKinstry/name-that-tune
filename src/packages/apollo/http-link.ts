@@ -1,6 +1,8 @@
-import { ApolloLink, createHttpLink } from "@apollo/client";
+import { BatchHttpLink } from "@apollo/client/link/batch-http";
 
-export const httpLink = createHttpLink({
-    uri: "/api/graphql",
-    credentials: "same-origin",
+export const httpLink = new BatchHttpLink({
+  uri: "/api/graphql",
+  credentials: "same-origin",
+  batchMax: 10,
+  batchInterval: 20,
 });

@@ -1,12 +1,12 @@
-@use 'styles/colors';
-@use 'styles/spacing';
-@use 'styles/typography';
+@use "styles/colors";
+@use "styles/spacing";
+@use "styles/typography";
 
 .artistRow {
     padding: spacing.$spacing-2;
     display: flex;
     align-items: center;
-    transition-duration: 100ms;
+    transition-duration: 50ms;
     &:hover,
     &:focus {
         background-color: colors.$zinc-900;
@@ -23,4 +23,5 @@
     padding: spacing.$spacing-2 spacing.$spacing-4;
     @include typography.font-medium;
     @include typography.tracking-wider;
+    @include typography.text-ellipsis;
 }
