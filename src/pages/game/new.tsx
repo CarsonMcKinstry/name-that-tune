@@ -11,7 +11,11 @@ const NewGame: NextPage = () => {
         <div>
             <h2>New Game</h2>
             {/* <TopTracks /> */}
-            <TopArtists />
+            <TopArtists
+                onSelect={(id) => {
+                    console.log(id);
+                }}
+            />
             {/* 
             
             <SearchArtists />

@@ -5,10 +5,15 @@ import {
     ArtistPortrait,
 } from "components/ArtistList";
 import { FC, useMemo } from "react";
+import styles from "./topArtists.module.scss";
 
 import { useMyTopArtistsQuery } from "./topArtists.hook";
 
-export const TopArtists: FC = () => {
+interface TopArtistsProps {
+    onSelect: (id: string) => void;
+}
+
+export const TopArtists: FC<TopArtistsProps> = ({ onSelect }) => {
     const { data } = useMyTopArtistsQuery();
 
     const artists = useMemo(() => {
@@ -20,10 +25,18 @@ export const TopArtists: FC = () => {
     return (
         <ArtistList>
             {artists.map(({ id }) => (
-                <ArtistRow artistId={id!} key={id}>
-                    <ArtistPortrait />
-                    <ArtistName />
-                </ArtistRow>
+                <button
+                    key={id}
+                    className={styles.topArtistRowButton}
+                    onClick={() => {
+                        onSelect(id!);
+                    }}
+                >
+                    <ArtistRow artistId={id!}>
+                        <ArtistPortrait />
+                        <ArtistName />
+                    </ArtistRow>
+                </button>
             ))}
         </ArtistList>
     );
