@@ -3,7 +3,6 @@
 @use "styles/transitions";
 @use "styles/typography";
 
-
 .trackRow {
     height: spacing.$spacing-16;
     display: flex;
@@ -11,7 +10,8 @@
     transition-duration: transitions.$duration-75;
     padding: spacing.$spacing-2;
     width: 100%;
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
         background-color: colors.$zinc-800;
     }
 }

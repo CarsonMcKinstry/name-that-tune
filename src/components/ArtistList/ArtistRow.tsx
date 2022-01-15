@@ -15,7 +15,16 @@ export const ArtistRow: FC<ArtistRowProps> = ({
 }) => {
     return (
         <ArtistProvider artistId={artistId}>
-            <li className={styles.artistRow}>{children}</li>
+            <li>
+                <button
+                    onClick={() => {
+                        onClick && onClick(artistId);
+                    }}
+                    className={styles.artistRow}
+                >
+                    {children}
+                </button>
+            </li>
         </ArtistProvider>
     );
 };
