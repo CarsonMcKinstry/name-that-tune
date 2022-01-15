@@ -1,0 +1,45 @@
+@use "styles/colors";
+@use "styles/spacing";
+@use "styles/transitions";
+@use "styles/typography";
+
+
+.trackRow {
+    height: spacing.$spacing-16;
+    display: flex;
+    align-items: center;
+    transition-duration: transitions.$duration-75;
+    padding: spacing.$spacing-2;
+    width: 100%;
+    &:hover, &:focus {
+        background-color: colors.$zinc-800;
+    }
+}
+
+.trackAlbumArtwork {
+    height: 100%;
+}
+
+.trackInfo {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 spacing.$spacing-2;
+    text-align: left;
+    overflow: hidden;
+}
+
+.trackName {
+    @include typography.font-semibold;
+    @include typography.text-truncate;
+    @include typography.tracking-wide;
+    color: colors.$zinc-200;
+}
+
+.trackArtist {
+    @include typography.text-sm;
+    @include typography.text-truncate;
+    color: colors.$zinc-400;
+}

@@ -3,14 +3,19 @@ import styles from "./artistList.module.scss";
 
 interface ArtistRowProps {
     artistId: string;
+    onClick?: (artistId: string) => void;
 }
 
 import { ArtistProvider } from "./ArtistProvider";
 
-export const ArtistRow: FC<ArtistRowProps> = ({ children, artistId }) => {
+export const ArtistRow: FC<ArtistRowProps> = ({
+    children,
+    artistId,
+    onClick,
+}) => {
     return (
-        <li className={styles.artistRow}>
-            <ArtistProvider artistId={artistId}>{children}</ArtistProvider>
-        </li>
+        <ArtistProvider artistId={artistId}>
+            <li className={styles.artistRow}>{children}</li>
+        </ArtistProvider>
     );
 };

@@ -596,13 +596,6 @@ export type UserProfilePlaylistsArgs = {
   offset?: InputMaybe<Scalars['Int']>;
 };
 
-export type ArtistQueryVariables = Exact<{
-  artistId: Scalars['ID'];
-}>;
-
-
-export type ArtistQuery = { __typename?: 'Query', artist?: { __typename?: 'Artist', id?: string | null | undefined, name: string, images: Array<{ __typename?: 'Image', url: string, height?: number | null | undefined, width?: number | null | undefined }> } | null | undefined };
-
 export type GetArtistQueryVariables = Exact<{
   artistId: Scalars['ID'];
 }>;
@@ -650,6 +643,13 @@ export type TrackQueryVariables = Exact<{
 
 
 export type TrackQuery = { __typename?: 'Query', track?: { __typename?: 'Track', id: string, name: string, preview_url?: string | null | undefined, album?: { __typename?: 'Album', id?: string | null | undefined, name: string, images: Array<{ __typename?: 'Image', url: string, height?: number | null | undefined, width?: number | null | undefined }> } | null | undefined, artists: Array<{ __typename?: 'Artist', id?: string | null | undefined, name: string }> } | null | undefined };
+
+export type GetTrackQueryVariables = Exact<{
+  trackId: Scalars['ID'];
+}>;
+
+
+export type GetTrackQuery = { __typename?: 'Query', track?: { __typename?: 'Track', id: string, name: string, preview_url?: string | null | undefined, artists: Array<{ __typename?: 'Artist', name: string, id?: string | null | undefined, images: Array<{ __typename?: 'Image', width?: number | null | undefined, height?: number | null | undefined, url: string }> }>, album?: { __typename?: 'Album', name: string, id?: string | null | undefined, images: Array<{ __typename?: 'Image', width?: number | null | undefined, height?: number | null | undefined, url: string }> } | null | undefined } | null | undefined };
 
 
 

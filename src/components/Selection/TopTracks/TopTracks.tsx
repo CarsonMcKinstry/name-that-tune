@@ -1,4 +1,11 @@
-import { Track } from "components/Track";
+import {
+    TrackList,
+    TrackRow,
+    TrackInfo,
+    TrackArtist,
+    TrackName,
+    TrackAlbumArtwork,
+} from "components/TrackList";
 import { FC, useMemo } from "react";
 import { useMyTopTracksQuery } from "./topTracks.hook";
 
@@ -12,10 +19,20 @@ export const TopTracks: FC = () => {
     }, [data]);
 
     return (
-        <div>
+        <TrackList>
             {tracks.map((track) => (
-                <Track trackId={track.id} key={track.id} />
+                <TrackRow
+                    trackId={track.id}
+                    key={track.id}
+                    onClick={(id) => console.log(id)}
+                >
+                    <TrackAlbumArtwork />
+                    <TrackInfo>
+                        <TrackName />
+                        <TrackArtist />
+                    </TrackInfo>
+                </TrackRow>
             ))}
-        </div>
+        </TrackList>
     );
 };

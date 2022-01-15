@@ -1,42 +1,31 @@
-import * as Types from "@packages/graphql";
+import * as Types from '@packages/graphql';
 
-import { gql } from "@apollo/client";
-import * as Apollo from "@apollo/client";
-const defaultOptions = {};
+import { gql } from '@apollo/client';
+import * as Apollo from '@apollo/client';
+const defaultOptions =  {}
 export type SearchArtistsQueryVariables = Types.Exact<{
-    query: Types.Scalars["String"];
-    limit?: Types.InputMaybe<Types.Scalars["Int"]>;
-    offset?: Types.InputMaybe<Types.Scalars["Int"]>;
+  query: Types.Scalars['String'];
+  limit?: Types.InputMaybe<Types.Scalars['Int']>;
+  offset?: Types.InputMaybe<Types.Scalars['Int']>;
 }>;
 
-export type SearchArtistsQuery = {
-    __typename?: "Query";
-    searchArtists: {
-        __typename?: "Artists";
-        offset: number;
-        limit: number;
-        total: number;
-        next?: number | null | undefined;
-        artists: Array<{
-            __typename?: "Artist";
-            id?: string | null | undefined;
-        }>;
-    };
-};
+
+export type SearchArtistsQuery = { __typename?: 'Query', searchArtists: { __typename?: 'Artists', offset: number, limit: number, total: number, next?: number | null | undefined, artists: Array<{ __typename?: 'Artist', id?: string | null | undefined }> } };
+
 
 export const SearchArtistsDocument = gql`
     query SearchArtists($query: String!, $limit: Int, $offset: Int) {
-        searchArtists(query: $query, limit: $limit, offset: $offset) {
-            offset
-            limit
-            total
-            next
-            artists {
-                id
-            }
-        }
+  searchArtists(query: $query, limit: $limit, offset: $offset) {
+    offset
+    limit
+    total
+    next
+    artists {
+      id
     }
-`;
+  }
+}
+    `;
 
 /**
  * __useSearchArtistsQuery__
@@ -56,37 +45,14 @@ export const SearchArtistsDocument = gql`
  *   },
  * });
  */
-export function useSearchArtistsQuery(
-    baseOptions: Apollo.QueryHookOptions<
-        SearchArtistsQuery,
-        SearchArtistsQueryVariables
-    >
-) {
-    const options = { ...defaultOptions, ...baseOptions };
-    return Apollo.useQuery<SearchArtistsQuery, SearchArtistsQueryVariables>(
-        SearchArtistsDocument,
-        options
-    );
-}
-export function useSearchArtistsLazyQuery(
-    baseOptions?: Apollo.LazyQueryHookOptions<
-        SearchArtistsQuery,
-        SearchArtistsQueryVariables
-    >
-) {
-    const options = { ...defaultOptions, ...baseOptions };
-    return Apollo.useLazyQuery<SearchArtistsQuery, SearchArtistsQueryVariables>(
-        SearchArtistsDocument,
-        options
-    );
-}
-export type SearchArtistsQueryHookResult = ReturnType<
-    typeof useSearchArtistsQuery
->;
-export type SearchArtistsLazyQueryHookResult = ReturnType<
-    typeof useSearchArtistsLazyQuery
->;
-export type SearchArtistsQueryResult = Apollo.QueryResult<
-    SearchArtistsQuery,
-    SearchArtistsQueryVariables
->;
+export function useSearchArtistsQuery(baseOptions: Apollo.QueryHookOptions<SearchArtistsQuery, SearchArtistsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SearchArtistsQuery, SearchArtistsQueryVariables>(SearchArtistsDocument, options);
+      }
+export function useSearchArtistsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SearchArtistsQuery, SearchArtistsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SearchArtistsQuery, SearchArtistsQueryVariables>(SearchArtistsDocument, options);
+        }
+export type SearchArtistsQueryHookResult = ReturnType<typeof useSearchArtistsQuery>;
+export type SearchArtistsLazyQueryHookResult = ReturnType<typeof useSearchArtistsLazyQuery>;
+export type SearchArtistsQueryResult = Apollo.QueryResult<SearchArtistsQuery, SearchArtistsQueryVariables>;

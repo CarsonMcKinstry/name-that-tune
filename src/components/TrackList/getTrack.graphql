@@ -1,0 +1,25 @@
+query GetTrack($trackId: ID!) {
+  track(id: $trackId) {
+    id
+    name
+    artists {
+      name
+      id
+      images {
+        width
+        height
+        url
+      }
+    }
+    album {
+      name
+      images {
+        width
+        height
+        url
+      }
+      id
+    }
+    preview_url
+  }
+}
