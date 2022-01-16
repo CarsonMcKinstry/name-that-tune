@@ -1,7 +1,10 @@
 import { useAudioControls, useAudioState } from "@components/AudioPlayer";
 import { FC, useEffect, useRef } from "react";
 import { useTrack } from "./trackContext";
-export const TrackPreview: FC = () => {
+
+import styles from "./trackList.module.scss";
+
+export const TrackPreview: FC = ({ children }) => {
     const { previewUrl } = useTrack();
     const { playing, source } = useAudioState();
     const { play, pause } = useAudioControls();
@@ -18,11 +21,14 @@ export const TrackPreview: FC = () => {
         }
     };
 
-    const icon = playing && isCurrentTrack ? "pause" : "play_arrow";
-
     return (
-        <button onClick={togglePreview}>
-            <span className="material-icons">{icon}</span>
+        <button className={styles.trackPlayToggle} onClick={togglePreview}>
+            {isCurrentTrack && playing && (
+                <span className={`material-icons ${styles.pause}`}>
+                    pause_circle_filled
+                </span>
+            )}
+            {children}
         </button>
     );
 };

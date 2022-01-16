@@ -5,6 +5,7 @@ import {
     TrackArtist,
     TrackName,
     TrackAlbumArtwork,
+    TrackAdd,
 } from "components/TrackList";
 import { FC, useMemo } from "react";
 import { useMyTopTracksQuery } from "./topTracks.hook";
@@ -27,6 +28,12 @@ export const TopTracks: FC = () => {
                         <TrackName />
                         <TrackArtist />
                     </TrackInfo>
+                    <TrackAdd
+                        icon="add_circle"
+                        onClick={() => {
+                            console.log(track.id);
+                        }}
+                    />
                 </TrackRow>
             ))}
         </TrackList>

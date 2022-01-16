@@ -4,3 +4,4 @@ export { TrackInfo } from "./TrackInfo";
 export { TrackName } from "./TrackName";
 export { TrackArtist } from "./TrackArtist";
 export { TrackRow } from "./TrackRow";
+export { TrackAdd } from "./TrackAdd";
