@@ -4,9 +4,6 @@
 @use "styles/typography";
 
 .trackRow {
-    height: spacing.$spacing-16;
-    display: flex;
-    align-items: center;
     transition-duration: transitions.$duration-75;
     padding: spacing.$spacing-2;
     width: 100%;
@@ -14,6 +11,10 @@
     &:focus {
         background-color: colors.$zinc-800;
     }
+    height: spacing.$spacing-16;
+    display: flex;
+    align-items: center;
+    position: relative;
 }
 
 .trackAlbumArtwork {

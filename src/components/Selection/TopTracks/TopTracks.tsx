@@ -21,11 +21,7 @@ export const TopTracks: FC = () => {
     return (
         <TrackList>
             {tracks.map((track) => (
-                <TrackRow
-                    trackId={track.id}
-                    key={track.id}
-                    onClick={(id) => console.log(id)}
-                >
+                <TrackRow trackId={track.id} key={track.id}>
                     <TrackAlbumArtwork />
                     <TrackInfo>
                         <TrackName />

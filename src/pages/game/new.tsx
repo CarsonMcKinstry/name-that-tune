@@ -5,7 +5,8 @@ const NewGame: NextPage = () => {
     return (
         <div>
             <h2>New Game</h2>
-            <TopArtists onSelect={(id) => console.log(id)} />
+            {/* <TopArtists onSelect={(id) => console.log(id)} /> */}
+            <TopTracks />
         </div>
     );
 };
