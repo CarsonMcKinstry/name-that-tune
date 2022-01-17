@@ -1,6 +1,5 @@
-import { schema } from "@packages/graphql";
+import { schema, dataSources } from "@packages/graphql";
 import { SPOTIFY_ACCESS_TOKEN_COOKIE } from "@packages/spotify";
-import { SpotifyDataSource } from "@packages/spotify/graphql/SpotifyDataSource";
 import { ApolloServer } from "apollo-server-micro";
 import { NextApiHandler, NextApiRequest } from "next";
 
@@ -20,11 +19,7 @@ const apolloServer = new ApolloServer({
             spotifyAccessToken,
         };
     },
-    dataSources: () => {
-        return {
-            spotify: new SpotifyDataSource(),
-        };
-    },
+    dataSources,
 });
 
 export const config = {

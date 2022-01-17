@@ -3,13 +3,13 @@ import { ContextResolvers } from "@packages/graphql";
 export const trackResolvers: ContextResolvers = {
     Query: {
         track(_parent, { id, ...args }, { dataSources }) {
-            return dataSources.spotify.getTrack(id, args);
+            return dataSources.tracks.getTrack(id, args);
         },
         tracks(_parent, args, { dataSources }) {
-            return dataSources.spotify.getTracks(args);
+            return dataSources.tracks.getTracks(args);
         },
         recommendations(_parent, args, { dataSources }) {
-            return dataSources.spotify.getRecommendations(args);
+            return dataSources.users.getRecommendations(args);
         },
     },
     Track: {
@@ -18,8 +18,8 @@ export const trackResolvers: ContextResolvers = {
 
             if (!parent.id || parent.id === parent.uri) return null;
 
-            const track = await dataSources.spotify.getTrack(parent.id);
-            console.log(track.is_playable);
+            const track = await dataSources.tracks.getTrack(parent.id);
+
             return !!track.is_playable;
         },
         id(parent) {
@@ -33,14 +33,14 @@ export const trackResolvers: ContextResolvers = {
 
             if (!parent.id || parent.id === parent.uri) return null;
 
-            return dataSources.spotify.getTrackAudioFeatures.load(parent.id);
+            return dataSources.tracks.getTrackAudioFeatures.load(parent.id);
         },
         async album(parent, _args, { dataSources }) {
             if (parent.album) return parent.album;
 
             if (!parent.id) return null;
 
-            const track = await dataSources.spotify.getTrack(parent.id);
+            const track = await dataSources.tracks.getTrack(parent.id);
 
             return track.album ?? null;
         },

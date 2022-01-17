@@ -8,13 +8,13 @@ import { configurePagination } from "@packages/utils";
 export const albumResolvers: ContextResolvers = {
     Query: {
         album(_parent, { id, ...args }, { dataSources }) {
-            return dataSources.spotify.getAlbum(id, args);
+            return dataSources.albums.getAlbum(id, args);
         },
         albums(_parent, args, { dataSources }) {
-            return dataSources.spotify.getAlbums(args);
+            return dataSources.albums.getAlbums(args);
         },
         newReleases(_parent, args, { dataSources }) {
-            return dataSources.spotify.getNewReleases(args);
+            return dataSources.albums.getNewReleases(args);
         },
     },
     Album: {
@@ -40,14 +40,14 @@ export const albumResolvers: ContextResolvers = {
                     total: 0,
                 };
 
-            return dataSources.spotify.getTracksForAlbum(parent.id, args);
+            return dataSources.tracks.getTracksForAlbum(parent.id, args);
         },
         async total_tracks(parent, _args, { dataSources }) {
             if (parent.total_tracks) return parent.total_tracks;
 
             if (!parent.id) return 0;
 
-            const album = await dataSources.spotify.getAlbum(parent.id);
+            const album = await dataSources.albums.getAlbum(parent.id);
 
             return album.total_tracks ?? 0;
         },
@@ -57,7 +57,7 @@ export const albumResolvers: ContextResolvers = {
 
             if (!parent.id) return null;
 
-            const album = await dataSources.spotify.getAlbum(parent.id);
+            const album = await dataSources.albums.getAlbum(parent.id);
 
             return album.release_date_precision ?? null;
         },
@@ -66,7 +66,7 @@ export const albumResolvers: ContextResolvers = {
 
             if (!parent.id) return null;
 
-            const album = await dataSources.spotify.getAlbum(parent.id);
+            const album = await dataSources.albums.getAlbum(parent.id);
 
             return album.album_type ?? null;
         },

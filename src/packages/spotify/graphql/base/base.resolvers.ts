@@ -3,16 +3,16 @@ import { ContextResolvers } from "@packages/graphql";
 export const spotifyBaseResolvers: ContextResolvers = {
     Query: {
         genres(_parent, _args, { dataSources }) {
-            return dataSources.spotify.getGenres();
+            return dataSources.spotifyBase.getGenres();
         },
         markets(_parent, _args, { dataSources }) {
-            return dataSources.spotify.getMarkets();
+            return dataSources.spotifyBase.getMarkets();
         },
         categories(_parent, args, { dataSources }) {
-            return dataSources.spotify.getCategories(args);
+            return dataSources.spotifyBase.getCategories(args);
         },
         category(_parent, { id, ...args }, { dataSources }) {
-            return dataSources.spotify.getCategory(id, args);
+            return dataSources.spotifyBase.getCategory(id, args);
         },
     },
 };

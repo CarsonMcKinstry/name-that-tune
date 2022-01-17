@@ -8,10 +8,10 @@ import { configurePagination } from "@packages/utils";
 export const artistResolvers: ContextResolvers = {
     Query: {
         artist(_parent, { id }, { dataSources }) {
-            return dataSources.spotify.getArtist(id);
+            return dataSources.artists.getArtist(id);
         },
         artists(_parent, args, { dataSources }) {
-            return dataSources.spotify.getArtists(args);
+            return dataSources.artists.getArtists(args);
         },
     },
     Artist: {
@@ -20,7 +20,7 @@ export const artistResolvers: ContextResolvers = {
 
             if (!parent.id) return null;
 
-            const artist = await dataSources.spotify.getArtist(parent.id);
+            const artist = await dataSources.artists.getArtist(parent.id);
 
             return artist.uri ?? null;
         },
@@ -29,7 +29,7 @@ export const artistResolvers: ContextResolvers = {
 
             if (!parent.id) return 0;
 
-            const artist = await dataSources.spotify.getArtist(parent.id);
+            const artist = await dataSources.artists.getArtist(parent.id);
 
             return artist.popularity ?? 0;
         },
@@ -38,7 +38,7 @@ export const artistResolvers: ContextResolvers = {
 
             if (!parent.id) return [];
 
-            const artist = await dataSources.spotify.getArtist(parent.id);
+            const artist = await dataSources.artists.getArtist(parent.id);
 
             return artist.images ?? [];
         },
@@ -47,7 +47,7 @@ export const artistResolvers: ContextResolvers = {
 
             if (!parent.id) return [];
 
-            const artist = await dataSources.spotify.getArtist(parent.id);
+            const artist = await dataSources.artists.getArtist(parent.id);
 
             return artist.genres ?? [];
         },
@@ -56,7 +56,7 @@ export const artistResolvers: ContextResolvers = {
 
             if (!parent.id) return { total: 0 };
 
-            const artist = await dataSources.spotify.getArtist(parent.id);
+            const artist = await dataSources.artists.getArtist(parent.id);
 
             return artist.followers ?? { total: 0 };
         },
@@ -82,18 +82,18 @@ export const artistResolvers: ContextResolvers = {
                     albums: [],
                 };
 
-            return dataSources.spotify.getAlbumsForArtist(parent.id, args);
+            return dataSources.albums.getAlbumsForArtist(parent.id, args);
         },
         async top_tracks(parent, args, { dataSources }) {
             if (!parent.id) return null;
 
-            return dataSources.spotify.getTopTracksForArtist(parent.id, args);
+            return dataSources.tracks.getTopTracksForArtist(parent.id, args);
         },
 
         async related_artists(parent, _args, { dataSources }) {
             if (!parent.id) return null;
 
-            return dataSources.spotify.getRelatedArtists(parent.id);
+            return dataSources.artists.getRelatedArtists(parent.id);
         },
     },
 };

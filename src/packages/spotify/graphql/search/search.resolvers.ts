@@ -3,16 +3,16 @@ import { ContextResolvers } from "@packages/graphql";
 export const searchResolvers: ContextResolvers = {
     Query: {
         search(_parent, { query, ...args }, { dataSources }) {
-            return dataSources.spotify.search(query, args);
+            return dataSources.search.search(query, args);
         },
         searchAlbums(_parent, { query, ...args }, { dataSources }) {
-            return dataSources.spotify.searchAlbums(query, args);
+            return dataSources.albums.search(query, args);
         },
         searchArtists(_parent, { query, ...args }, { dataSources }) {
-            return dataSources.spotify.searchArtists(query, args);
+            return dataSources.artists.search(query, args);
         },
         searchTracks(_parent, { query, ...args }, { dataSources }) {
-            return dataSources.spotify.searchTracks(query, args);
+            return dataSources.tracks.search(query, args);
         },
     },
 };

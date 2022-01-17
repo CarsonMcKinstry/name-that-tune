@@ -18,7 +18,14 @@ import {
     searchTypeDefs,
     playlistResolvers,
     playlistTypeDefs,
-} from "@packages/spotify/graphql";
+    AlbumDataSource,
+    ArtistDataSource,
+    BaseDataSource,
+    PlaylistDataSource,
+    SearchDataSource,
+    TrackDataSource,
+    UserDataSource,
+} from "@packages/spotify";
 
 const typeDefs = [
     baseTypeDefs,
@@ -45,6 +52,16 @@ const resolvers = mergeResolvers<any, GraphqlContext>([
 export const schema = makeExecutableSchema<GraphqlContext>({
     typeDefs,
     resolvers,
+});
+
+export const dataSources = () => ({
+    albums: new AlbumDataSource(),
+    artists: new ArtistDataSource(),
+    spotifyBase: new BaseDataSource(),
+    playlists: new PlaylistDataSource(),
+    search: new SearchDataSource(),
+    tracks: new TrackDataSource(),
+    users: new UserDataSource(),
 });
 
 export type { GraphqlContext };

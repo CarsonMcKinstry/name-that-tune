@@ -1,6 +1,12 @@
+import { UserDataSource } from "./graphql/user/UserDataSource";
+import { TrackDataSource } from "./graphql/track/TrackDataSource";
+import { BaseDataSource } from "./graphql/base/BaseDataSource";
+import { AlbumDataSource } from "./graphql/album/AlbumDataSource";
 import { Nullable } from "@packages/types";
 import { SpotifyDataSource } from "./graphql/SpotifyDataSource";
-
+import { ArtistDataSource } from "./graphql/artist";
+import { SearchDataSource } from "./graphql/search";
+import { PlaylistDataSource } from "./graphql/playlist";
 export interface AuthSuccess {
     access_token: string;
     token_type: string;
@@ -30,5 +36,12 @@ export type ApolloSpotifyContext = {
     spotifyAccessToken?: string;
     dataSources: {
         spotify: SpotifyDataSource;
+        albums: AlbumDataSource;
+        artists: ArtistDataSource;
+        spotifyBase: BaseDataSource;
+        playlists: PlaylistDataSource;
+        search: SearchDataSource;
+        tracks: TrackDataSource;
+        users: UserDataSource;
     };
 };
