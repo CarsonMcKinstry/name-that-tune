@@ -1,1 +1,0 @@
-export { SearchArtists } from "./SearchArtists";
