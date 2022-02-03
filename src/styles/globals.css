@@ -1,3 +1,43 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.reveal-animation {
+    animation-direction: forwards;
+    animation-timing-function: linear;
+    animation-play-state: paused;
+    animation-duration: 30s;
+}
+
+.reveal-animation.play {
+    animation-play-state: running;
+}
+
+.progress {
+    animation-name: progress;
+}
+
+.image-reveal {
+    animation-name: image-reveal;
+}
+
+@keyframes progress {
+    from {
+        transform: translateX(-100%);
+    } 
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes image-reveal {
+    from {
+      filter: blur(2em);
+    }
+    to {
+      filtter: blur(0);
+    }
+  }
+  
