@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+#__next {
+    height: 100%;
+}
 
 .reveal-animation {
     animation-direction: forwards;
@@ -25,7 +28,7 @@
 @keyframes progress {
     from {
         transform: translateX(-100%);
-    } 
+    }
 
     to {
         transform: translateX(0);
@@ -34,10 +37,9 @@
 
 @keyframes image-reveal {
     from {
-      filter: blur(2em);
+        filter: blur(2em);
     }
     to {
-      filtter: blur(0);
+        filtter: blur(0);
     }
-  }
-  
+}

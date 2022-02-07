@@ -1,23 +1,28 @@
 import cn from "classnames";
 import { FC } from "react";
-import { useCurrentRound, useGameContext } from "./gameContext";
 
-interface GameAlbumArtworkProps {}
+interface GameAlbumArtworkProps {
+    onLoad: () => void;
+    playing: boolean;
+    url: string;
+}
 
-export const AlbumArtwork: FC<GameAlbumArtworkProps> = () => {
-    const { playing } = useGameContext();
-    const { track } = useCurrentRound();
-
+export const AlbumArtwork: FC<GameAlbumArtworkProps> = ({
+    onLoad,
+    playing,
+    url,
+}) => {
     return (
-        <div className="w-full pl-3 pr-3 md:p-0 flex justify-center max-w-[360px]">
+        <div className="w-full pl-3 pr-3 md:p-0 flex justify-center max-w-[340px]">
             <img
+                onLoad={onLoad}
                 className={cn(
                     "w-full rounded-lg reveal-animation image-reveal",
                     {
                         play: playing,
                     }
                 )}
-                src={track.albumArtwork}
+                src={url}
                 alt="album artwork slowly revealing itself"
             />
         </div>

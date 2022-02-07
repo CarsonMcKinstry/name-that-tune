@@ -1,4 +1,4 @@
-import { FC, useCallback, useMemo, useRef, useState } from "react";
+import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useAudioState } from ".";
 import {
     AudioPlayerControlProvider,
@@ -21,7 +21,6 @@ export const AudioPlayer: FC = ({ children }) => {
                 }
 
                 player.play();
-                setPlaying(true);
             }
         },
         [currentSource]
@@ -31,7 +30,6 @@ export const AudioPlayer: FC = ({ children }) => {
         const { current: player } = audioRef;
         if (player) {
             player.pause();
-            setPlaying(false);
         }
     }, []);
 
@@ -50,6 +48,34 @@ export const AudioPlayer: FC = ({ children }) => {
         }),
         [play, pause]
     );
+
+    useEffect(() => {
+        function playing() {
+            setPlaying(true);
+        }
+
+        function paused() {
+            setPlaying(false);
+        }
+
+        if (audioRef.current) {
+            audioRef.current.addEventListener("play", playing.bind(this));
+            audioRef.current.addEventListener("pause", paused.bind(this));
+        }
+
+        return () => {
+            if (audioRef.current) {
+                audioRef.current?.removeEventListener(
+                    "play",
+                    playing.bind(this)
+                );
+                audioRef.current.removeEventListener(
+                    "pause",
+                    paused.bind(this)
+                );
+            }
+        };
+    }, [audioRef]);
 
     return (
         <>

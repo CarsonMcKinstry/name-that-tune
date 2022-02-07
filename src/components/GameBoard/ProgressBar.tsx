@@ -1,14 +1,13 @@
-import "./gameBoard.css";
 import { FC } from "react";
 import cn from "classnames";
-import { useGameContext } from "./gameContext";
 
-interface ProgressBarProps {}
+interface ProgressBarProps {
+    playing: boolean;
+}
 
-export const ProgressBar: FC<ProgressBarProps> = ({}) => {
-    const { playing } = useGameContext();
+export const ProgressBar: FC<ProgressBarProps> = ({ playing }) => {
     return (
-        <div className="p-3 pb-0 md:p-0 md:pt-6 w-full max-w-[360px]">
+        <div className="p-3 pb-0 md:p-0 md:pt-6 w-full max-w-[360px] justify-self-start">
             <div className="rounded-lg h-2 w-full bg-zinc-500 overflow-hidden">
                 <div
                     className={cn(
