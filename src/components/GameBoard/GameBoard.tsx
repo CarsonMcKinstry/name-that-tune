@@ -1,41 +1,64 @@
 import { useAudioControls, useAudioState } from "@components/AudioPlayer";
-import { FC, useMemo, useState } from "react";
+import { Portal } from "@components/Portal/Portal";
+import { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { AlbumArtwork } from "./AlbumArtwork";
+
 import { Header } from "./Header";
+import { useRounds } from "./hooks/useRounds";
 import { ProgressBar } from "./ProgressBar";
 import { Round } from "./Round";
+import { GameStart } from "./GameStart";
 import { TrackOptions } from "./TrackOptions";
-import { RoundData } from "./types";
+import { RoundData, GameInput } from "./types";
+import { createSteps } from "@components/Steps";
+import { useTimer } from "@packages/hooks";
 
-interface GameBoardProps {
-    artists: [string] | [string, string];
-    tracks: [string] | [string, string];
-    genre: string;
-}
+interface GameBoardProps extends GameInput {}
 
-interface RoundStartProps {
-    onClick: () => void;
-    score: number;
-    round: number;
-    rounds: number;
-}
-
-const RoundStart: FC<RoundStartProps> = ({ onClick, score, round, rounds }) => {
-    return (
-        <div>
-            <button onClick={onClick}>Start</button>
-        </div>
-    );
-};
+const [Steps, Step, useSteps] = createSteps({
+    initial: "newGame",
+    steps: {
+        newGame: ["playing"],
+        playing: ["timesUp", "wrongAnswer", "rightAnswer"],
+        timesUp: ["playing", "finished"],
+        wrongAnswer: ["playing", "finished"],
+        rightAnswer: ["playing", "finished"],
+        finished: ["newGame"],
+    },
+});
 
 export const GameBoard: FC<GameBoardProps> = ({ artists, tracks, genre }) => {
+    const [step, setStep] = useSteps();
+
     const { playing: previewPlaying } = useAudioState();
-    const [playing, setPlaying] = useState(false);
-    const { play } = useAudioControls();
+    const audio = useAudioControls();
     const [imageLoaded, setImageLoaded] = useState(false);
     const [score, setScore] = useState(0);
     const [round, setRound] = useState(0);
 
+    const [timeElapsed, setTimeElapsed] = useState(0);
+
+    const [startTimer, stopTimer] = useTimer({
+        interval: 1000,
+        onTick() {
+            setTimeElapsed((t) => t + 1);
+        },
+    });
+
+    const timesUp = useCallback(() => {
+        audio.pause();
+        stopTimer();
+        setStep("timesUp");
+        setTimeElapsed(0);
+    }, [audio, stopTimer, setStep]);
+
+    useEffect(() => {
+        if (timeElapsed >= 30) {
+            timesUp();
+        }
+    }, [timeElapsed, timesUp]);
+
+    // console.log(useRounds({ artists, tracks, genre }));
     const rounds: RoundData[] = useMemo(() => {
         return [
             {
@@ -55,19 +78,19 @@ export const GameBoard: FC<GameBoardProps> = ({ artists, tracks, genre }) => {
                         artist: "Someone Someone",
                     },
                     {
-                        id: "12345",
+                        id: "12346",
                         name: "Something Something",
                         album: "Somewhere Somewhere",
                         artist: "Someone Someone",
                     },
                     {
-                        id: "12345",
+                        id: "12347",
                         name: "Something Something",
                         album: "Somewhere Somewhere",
                         artist: "Someone Someone",
                     },
                     {
-                        id: "12345",
+                        id: "12348",
                         name: "Something Something",
                         album: "Somewhere Somewhere",
                         artist: "Someone Someone",
@@ -78,14 +101,23 @@ export const GameBoard: FC<GameBoardProps> = ({ artists, tracks, genre }) => {
     }, []);
 
     function roundStart() {
-        play(
+        audio.play(
             "https://p.scdn.co/mp3-preview/4de2051c5b4ea6c2d61efea11c0c77afa7c668d9?cid=d7f3177ddef646819afe4484cfd956c9"
         );
+        startTimer();
     }
 
     const { track, options } = useMemo(() => {
         return rounds[round];
     }, [rounds, round]);
+
+    function guess(id: string) {
+        if (id === track.id) {
+            console.log("Winner!");
+        } else {
+            console.log("Loser!");
+        }
+    }
 
     return (
         <div className="w-full h-full flex flex-col justify-between">
@@ -95,36 +127,50 @@ export const GameBoard: FC<GameBoardProps> = ({ artists, tracks, genre }) => {
                 score={score}
                 onQuit={() => console.log("quit")}
             />
-            {playing ? (
-                <Round>
-                    <AlbumArtwork
-                        playing={previewPlaying}
-                        url={track.albumArtwork}
-                        onLoad={() => {
-                            setImageLoaded(true);
-                            roundStart();
+            <Steps state={step}>
+                <Step step="newGame">
+                    <GameStart
+                        onStart={() => {
+                            setStep("playing");
                         }}
+                        onQuit={() => {
+                            console.log("you can never leave");
+                        }}
+                        rounds={rounds.length}
+                        round={round}
+                        score={score}
                     />
-                    {imageLoaded && (
-                        <>
-                            <ProgressBar playing={previewPlaying} />
-                            <TrackOptions
-                                onSelect={(id) => console.log(id)}
-                                options={options}
-                            />
-                        </>
-                    )}
-                </Round>
-            ) : (
-                <RoundStart
-                    onClick={() => {
-                        setPlaying(true);
-                    }}
-                    rounds={rounds.length}
-                    round={round}
-                    score={score}
-                />
-            )}
+                </Step>
+                <Step step="playing">
+                    <p>{timeElapsed}</p>
+                    <Round>
+                        <AlbumArtwork
+                            playing={previewPlaying}
+                            url={track.albumArtwork}
+                            onLoad={() => {
+                                setImageLoaded(true);
+                                roundStart();
+                            }}
+                        />
+                        {imageLoaded && (
+                            <>
+                                <ProgressBar playing={previewPlaying} />
+                                <TrackOptions
+                                    onSelect={(id) => {
+                                        guess(id);
+                                    }}
+                                    options={options}
+                                />
+                            </>
+                        )}
+                    </Round>
+                </Step>
+                <Step step="timesUp">
+                    <div className="w-full h-full">
+                        <p>Times up!</p>
+                    </div>
+                </Step>
+            </Steps>
         </div>
     );
 };

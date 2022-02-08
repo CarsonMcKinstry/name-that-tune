@@ -596,60 +596,12 @@ export type UserProfilePlaylistsArgs = {
   offset?: InputMaybe<Scalars['Int']>;
 };
 
-export type GetArtistQueryVariables = Exact<{
-  artistId: Scalars['ID'];
+export type RecommendationsQueryVariables = Exact<{
+  input?: InputMaybe<RecommendationsInput>;
 }>;
 
 
-export type GetArtistQuery = { __typename?: 'Query', artist?: { __typename?: 'Artist', id?: string | null | undefined, name: string, images: Array<{ __typename?: 'Image', url: string, height?: number | null | undefined, width?: number | null | undefined }> } | null | undefined };
-
-export type SearchArtistsQueryVariables = Exact<{
-  query: Scalars['String'];
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-}>;
-
-
-export type SearchArtistsQuery = { __typename?: 'Query', searchArtists: { __typename?: 'Artists', offset: number, limit: number, total: number, next?: number | null | undefined, artists: Array<{ __typename?: 'Artist', id?: string | null | undefined }> } };
-
-export type SearchTracksQueryVariables = Exact<{
-  query: Scalars['String'];
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-}>;
-
-
-export type SearchTracksQuery = { __typename?: 'Query', searchTracks: { __typename?: 'Tracks', limit: number, offset: number, total: number, next?: number | null | undefined, tracks: Array<{ __typename?: 'Track', id: string, is_local: boolean }> } };
-
-export type MyTopArtistsQueryVariables = Exact<{
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-}>;
-
-
-export type MyTopArtistsQuery = { __typename?: 'Query', me?: { __typename?: 'Me', top_artists: { __typename?: 'Artists', limit: number, offset: number, next?: number | null | undefined, total: number, artists: Array<{ __typename?: 'Artist', id?: string | null | undefined }> } } | null | undefined };
-
-export type MyTopTracksQueryVariables = Exact<{
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-}>;
-
-
-export type MyTopTracksQuery = { __typename?: 'Query', me?: { __typename?: 'Me', top_tracks: { __typename?: 'Tracks', limit: number, offset: number, next?: number | null | undefined, total: number, tracks: Array<{ __typename?: 'Track', id: string, is_local: boolean }> } } | null | undefined };
-
-export type TrackQueryVariables = Exact<{
-  trackId: Scalars['ID'];
-}>;
-
-
-export type TrackQuery = { __typename?: 'Query', track?: { __typename?: 'Track', id: string, name: string, preview_url?: string | null | undefined, album?: { __typename?: 'Album', id?: string | null | undefined, name: string, images: Array<{ __typename?: 'Image', url: string, height?: number | null | undefined, width?: number | null | undefined }> } | null | undefined, artists: Array<{ __typename?: 'Artist', id?: string | null | undefined, name: string }> } | null | undefined };
-
-export type GetTrackQueryVariables = Exact<{
-  trackId: Scalars['ID'];
-}>;
-
-
-export type GetTrackQuery = { __typename?: 'Query', track?: { __typename?: 'Track', id: string, name: string, preview_url?: string | null | undefined, artists: Array<{ __typename?: 'Artist', name: string, id?: string | null | undefined, images: Array<{ __typename?: 'Image', width?: number | null | undefined, height?: number | null | undefined, url: string }> }>, album?: { __typename?: 'Album', name: string, id?: string | null | undefined, images: Array<{ __typename?: 'Image', width?: number | null | undefined, height?: number | null | undefined, url: string }> } | null | undefined } | null | undefined };
+export type RecommendationsQuery = { __typename?: 'Query', recommendations: { __typename?: 'Recommendations', tracks: Array<{ __typename?: 'Track', id: string, name: string, preview_url?: string | null | undefined, is_playable?: boolean | null | undefined, artists: Array<{ __typename?: 'Artist', id?: string | null | undefined, name: string }>, album?: { __typename?: 'Album', id?: string | null | undefined, name: string, images: Array<{ __typename?: 'Image', url: string }> } | null | undefined }> } };
 
 
 

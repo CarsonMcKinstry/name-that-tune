@@ -1,0 +1,21 @@
+query Recommendations($input: RecommendationsInput) {
+    recommendations(input: $input) {
+        tracks {
+            id
+            name
+            artists {
+                id
+                name
+            }
+            preview_url
+            is_playable
+            album {
+                id
+                name
+                images {
+                    url
+                }
+            }
+        }
+    }
+}

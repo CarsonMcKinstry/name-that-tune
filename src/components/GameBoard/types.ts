@@ -12,3 +12,9 @@ export interface RoundData {
     };
     options: RoundTrack[];
 }
+
+export interface GameInput {
+    artists: [string] | [string, string];
+    tracks: [string] | [string, string];
+    genre: string;
+}
