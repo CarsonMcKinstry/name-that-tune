@@ -1,23 +1,50 @@
 import { FC } from "react";
 import cn from "classnames";
+import styled from "styled-components";
+import { spacing, screen, borderRadius, color } from "@styles/utils";
+import {
+    progress,
+    revealAnimation,
+    RevealAnimationProps,
+} from "@styles/animations";
 
 interface ProgressBarProps {
     playing: boolean;
 }
 
+const Container = styled.div`
+    padding: ${spacing(3)};
+    width: 100%;
+    max-width: 360px;
+    justify-self: start;
+
+    @media (min-width: ${screen("tablet")}) {
+        padding: 0;
+        padding-top: ${spacing(6)};
+    }
+`;
+
+const BarHousing = styled.div`
+    border-radius: ${borderRadius("lg")};
+    height: ${spacing(2)};
+    width: 100%;
+    background-color: ${color("zinc", 500)};
+    overflow: hidden;
+`;
+
+const Bar = styled.div<RevealAnimationProps>`
+    width: 100%;
+    height: 100%;
+    background-color: ${color("zinc", 100)};
+    ${revealAnimation}
+`;
+
 export const ProgressBar: FC<ProgressBarProps> = ({ playing }) => {
     return (
-        <div className="p-3 pb-0 md:p-0 md:pt-6 w-full max-w-[360px] justify-self-start">
-            <div className="rounded-lg h-2 w-full bg-zinc-500 overflow-hidden">
-                <div
-                    className={cn(
-                        "w-full bg-zinc-100 h-full reveal-animation progress",
-                        {
-                            play: playing,
-                        }
-                    )}
-                ></div>
-            </div>
-        </div>
+        <Container>
+            <BarHousing>
+                <Bar animation={progress} playing={playing} duration={30} />
+            </BarHousing>
+        </Container>
     );
 };
