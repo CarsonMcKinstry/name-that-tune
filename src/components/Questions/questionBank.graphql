@@ -1,0 +1,29 @@
+query BuildQuestionBank($artists: [String!]!, $tracks: [String!]!, $genre: String!) {
+  questionBank(artists: $artists, tracks: $tracks, genre: $genre) {
+    questions {
+      options {
+        id
+        name
+        preview_url
+        artists {
+          id
+          name
+          images {
+            url
+            height
+            width
+          }
+        }
+        album {
+          id
+          name
+          images {
+             url
+             height
+             width
+          }
+        }
+      }
+    }
+  }
+}

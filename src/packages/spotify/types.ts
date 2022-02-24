@@ -7,6 +7,8 @@ import { SpotifyDataSource } from "./graphql/SpotifyDataSource";
 import { ArtistDataSource } from "./graphql/artist";
 import { SearchDataSource } from "./graphql/search";
 import { PlaylistDataSource } from "./graphql/playlist";
+import { QuestionBankDataSource } from "@packages/graphql/schemas/questionBank";
+
 export interface AuthSuccess {
     access_token: string;
     token_type: string;
@@ -32,16 +34,19 @@ export type AuthProps = {
     accessToken: Nullable<string>;
 };
 
+export interface SpotifyDataSources {
+    spotify: SpotifyDataSource;
+    albums: AlbumDataSource;
+    artists: ArtistDataSource;
+    spotifyBase: BaseDataSource;
+    playlists: PlaylistDataSource;
+    search: SearchDataSource;
+    tracks: TrackDataSource;
+    users: UserDataSource;
+    questionBank: QuestionBankDataSource;
+}
+
 export type ApolloSpotifyContext = {
     spotifyAccessToken?: string;
-    dataSources: {
-        spotify: SpotifyDataSource;
-        albums: AlbumDataSource;
-        artists: ArtistDataSource;
-        spotifyBase: BaseDataSource;
-        playlists: PlaylistDataSource;
-        search: SearchDataSource;
-        tracks: TrackDataSource;
-        users: UserDataSource;
-    };
+    dataSources: SpotifyDataSources;
 };

@@ -5,10 +5,7 @@ import Link from "next/link";
 const Home: NextPage = () => {
     return (
         <div>
-            <h1>hello world</h1>
-            <Link href="/api/login">
-                <a>Login</a>
-            </Link>
+            <Link href="/api/login">Login</Link>
         </div>
     );
 };

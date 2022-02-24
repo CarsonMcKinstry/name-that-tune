@@ -318,6 +318,7 @@ export type Query = {
   me?: Maybe<Me>;
   newReleases: Albums;
   playlist?: Maybe<Playlist>;
+  questionBank: QuestionBank;
   recommendations: Recommendations;
   search?: Maybe<Search>;
   searchAlbums: Albums;
@@ -379,6 +380,13 @@ export type QueryPlaylistArgs = {
 };
 
 
+export type QueryQuestionBankArgs = {
+  artists: Array<Scalars['String']>;
+  genre: Scalars['String'];
+  tracks: Array<Scalars['String']>;
+};
+
+
 export type QueryRecommendationsArgs = {
   input?: InputMaybe<RecommendationsInput>;
 };
@@ -432,6 +440,16 @@ export type QueryTracksArgs = {
 
 export type QueryUserArgs = {
   id: Scalars['ID'];
+};
+
+export type Question = {
+  __typename?: 'Question';
+  options: Array<Track>;
+};
+
+export type QuestionBank = {
+  __typename?: 'QuestionBank';
+  questions: Array<Question>;
 };
 
 export type RecommendationSeed = {
@@ -596,12 +614,14 @@ export type UserProfilePlaylistsArgs = {
   offset?: InputMaybe<Scalars['Int']>;
 };
 
-export type RecommendationsQueryVariables = Exact<{
-  input?: InputMaybe<RecommendationsInput>;
+export type BuildQuestionBankQueryVariables = Exact<{
+  artists: Array<Scalars['String']> | Scalars['String'];
+  tracks: Array<Scalars['String']> | Scalars['String'];
+  genre: Scalars['String'];
 }>;
 
 
-export type RecommendationsQuery = { __typename?: 'Query', recommendations: { __typename?: 'Recommendations', tracks: Array<{ __typename?: 'Track', id: string, name: string, preview_url?: string | null | undefined, is_playable?: boolean | null | undefined, artists: Array<{ __typename?: 'Artist', id?: string | null | undefined, name: string }>, album?: { __typename?: 'Album', id?: string | null | undefined, name: string, images: Array<{ __typename?: 'Image', url: string }> } | null | undefined }> } };
+export type BuildQuestionBankQuery = { __typename?: 'Query', questionBank: { __typename?: 'QuestionBank', questions: Array<{ __typename?: 'Question', options: Array<{ __typename?: 'Track', id: string, name: string, preview_url?: string | null | undefined, artists: Array<{ __typename?: 'Artist', id?: string | null | undefined, name: string, images: Array<{ __typename?: 'Image', url: string, height?: number | null | undefined, width?: number | null | undefined }> }>, album?: { __typename?: 'Album', id?: string | null | undefined, name: string, images: Array<{ __typename?: 'Image', url: string, height?: number | null | undefined, width?: number | null | undefined }> } | null | undefined }> }> } };
 
 
 
@@ -702,6 +722,8 @@ export type ResolversTypes = {
   PlaylistTracks: ResolverTypeWrapper<PlaylistTracks>;
   Playlists: ResolverTypeWrapper<Playlists>;
   Query: ResolverTypeWrapper<{}>;
+  Question: ResolverTypeWrapper<Question>;
+  QuestionBank: ResolverTypeWrapper<QuestionBank>;
   RecommendationSeed: ResolverTypeWrapper<RecommendationSeed>;
   Recommendations: ResolverTypeWrapper<Recommendations>;
   RecommendationsInput: RecommendationsInput;
@@ -745,6 +767,8 @@ export type ResolversParentTypes = {
   PlaylistTracks: PlaylistTracks;
   Playlists: Playlists;
   Query: {};
+  Question: Question;
+  QuestionBank: QuestionBank;
   RecommendationSeed: RecommendationSeed;
   Recommendations: Recommendations;
   RecommendationsInput: RecommendationsInput;
@@ -979,6 +1003,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   me?: Resolver<Maybe<ResolversTypes['Me']>, ParentType, ContextType>;
   newReleases?: Resolver<ResolversTypes['Albums'], ParentType, ContextType, RequireFields<QueryNewReleasesArgs, never>>;
   playlist?: Resolver<Maybe<ResolversTypes['Playlist']>, ParentType, ContextType, RequireFields<QueryPlaylistArgs, 'id'>>;
+  questionBank?: Resolver<ResolversTypes['QuestionBank'], ParentType, ContextType, RequireFields<QueryQuestionBankArgs, 'artists' | 'genre' | 'tracks'>>;
   recommendations?: Resolver<ResolversTypes['Recommendations'], ParentType, ContextType, RequireFields<QueryRecommendationsArgs, never>>;
   search?: Resolver<Maybe<ResolversTypes['Search']>, ParentType, ContextType, RequireFields<QuerySearchArgs, 'query' | 'type'>>;
   searchAlbums?: Resolver<ResolversTypes['Albums'], ParentType, ContextType, RequireFields<QuerySearchAlbumsArgs, 'query'>>;
@@ -987,6 +1012,16 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   track?: Resolver<Maybe<ResolversTypes['Track']>, ParentType, ContextType, RequireFields<QueryTrackArgs, 'id'>>;
   tracks?: Resolver<Array<ResolversTypes['Track']>, ParentType, ContextType, RequireFields<QueryTracksArgs, 'ids'>>;
   user?: Resolver<Maybe<ResolversTypes['UserProfile']>, ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
+};
+
+export type QuestionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Question'] = ResolversParentTypes['Question']> = {
+  options?: Resolver<Array<ResolversTypes['Track']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type QuestionBankResolvers<ContextType = any, ParentType extends ResolversParentTypes['QuestionBank'] = ResolversParentTypes['QuestionBank']> = {
+  questions?: Resolver<Array<ResolversTypes['Question']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type RecommendationSeedResolvers<ContextType = any, ParentType extends ResolversParentTypes['RecommendationSeed'] = ResolversParentTypes['RecommendationSeed']> = {
@@ -1106,6 +1141,8 @@ export type Resolvers<ContextType = any> = {
   PlaylistTracks?: PlaylistTracksResolvers<ContextType>;
   Playlists?: PlaylistsResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  Question?: QuestionResolvers<ContextType>;
+  QuestionBank?: QuestionBankResolvers<ContextType>;
   RecommendationSeed?: RecommendationSeedResolvers<ContextType>;
   Recommendations?: RecommendationsResolvers<ContextType>;
   RelatedArtists?: RelatedArtistsResolvers<ContextType>;

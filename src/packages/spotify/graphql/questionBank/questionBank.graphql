@@ -1,0 +1,16 @@
+type Question {
+    options: [Track!]!
+}
+
+type QuestionBank {
+    questions: [Question!]!
+}
+
+
+type Query {
+    questionBank(
+        artists: [String!]!,
+        tracks: [String!]!,
+        genre: String!
+    ): QuestionBank!
+}

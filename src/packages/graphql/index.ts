@@ -1,8 +1,10 @@
+import { print } from "graphql";
 import { makeExecutableSchema } from "@graphql-tools/schema";
-import { mergeResolvers } from "@graphql-tools/merge";
+import { mergeResolvers, mergeTypeDefs } from "@graphql-tools/merge";
 import { GraphqlContext } from "./types";
 
 import { baseTypeDefs, baseResolvers } from "./schemas/base";
+
 import {
     spotifyBaseTypeDefs,
     spotifyBaseResolvers,
@@ -25,6 +27,9 @@ import {
     SearchDataSource,
     TrackDataSource,
     UserDataSource,
+    QuestionBankDataSource,
+    questionBankResolvers,
+    questionBankTypeDefs,
 } from "@packages/spotify";
 
 const typeDefs = [
@@ -36,6 +41,7 @@ const typeDefs = [
     userTypeDefs,
     searchTypeDefs,
     playlistTypeDefs,
+    questionBankTypeDefs,
 ];
 
 const resolvers = mergeResolvers<any, GraphqlContext>([
@@ -47,12 +53,15 @@ const resolvers = mergeResolvers<any, GraphqlContext>([
     trackResolvers,
     searchResolvers,
     playlistResolvers,
+    questionBankResolvers,
 ]);
 
 export const schema = makeExecutableSchema<GraphqlContext>({
     typeDefs,
     resolvers,
 });
+
+print(schema.astNode!);
 
 export const dataSources = () => ({
     albums: new AlbumDataSource(),
@@ -62,6 +71,7 @@ export const dataSources = () => ({
     search: new SearchDataSource(),
     tracks: new TrackDataSource(),
     users: new UserDataSource(),
+    questionBank: new QuestionBankDataSource(),
 });
 
 export type { GraphqlContext };

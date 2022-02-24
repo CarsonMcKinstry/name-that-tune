@@ -13,3 +13,8 @@ export {
 export { searchResolvers, searchTypeDefs, SearchDataSource } from "./search";
 export { trackResolvers, trackTypeDefs, TrackDataSource } from "./track";
 export { userResolvers, userTypeDefs, UserDataSource } from "./user";
+export {
+    QuestionBankDataSource,
+    questionBankResolvers,
+    questionBankTypeDefs,
+} from "./questionBank";
