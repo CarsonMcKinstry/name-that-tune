@@ -3,7 +3,14 @@ import type { GetServerSideProps, NextPage } from "next";
 import Link from "next/link";
 
 const Home: NextPage = () => {
-    return <Link href="/api/login">Login</Link>;
+    return (
+        <div>
+            <h1>hello world</h1>
+            <Link href="/api/login">
+                <a>Login</a>
+            </Link>
+        </div>
+    );
 };
 
 export default Home;
